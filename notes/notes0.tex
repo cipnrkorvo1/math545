@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+%\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{empheq}
+
+\title{Linear Algebra notes}
+\author{Grey}
+
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+	\section*{Systems of Equations}
+	(1) $2x_1+3x_2=4$\\\
+	(2) $x_1-x_2=7$\\
+	\noindent A system is \underline{consistent} if it has a solution.\\
+	Otherwise, the system is said to be \underline{inconsistent}.
+	
+	\subsection*{Substitution}
+	(2) $\Rightarrow x_1 = x_2 + 7$\\\
+	(1) $\Rightarrow 4 = 2x_1 + 3x_2$\\
+	$...$\\
+	$5x_2 = -10 \Rightarrow x_2 = -2$\\
+	
+	\noindent $\therefore (1) \Rightarrow 7 = x_1 - x_2 = x_1 - (-2) = x_1 + 2$\\
+	$\therefore x_1 = 5$\\
+	$(5, -2)$
+	
+	\subsection*{Elimination}
+	$(2) -2x_1 - (-2)x_2=-2(7)$\\
+	\\
+	$(1) ~~~~2x_1 + 3x_2 = 4$\\
+	$(2)-2x_1+2x_2=-14$\\
+	$\Downarrow$\\
+	$0x_1 + 5x_2 = -10$\\
+	$x_2 = -2 \Rightarrow ...$
+	
+	\subsection*{Equivalent Systems}
+	\begin{align*}
+		x_1 = a\\
+		x_2 = b\\
+		x_3 = c
+	\end{align*}
+	Consider
+	\begin{empheq}[right=\empheqrbrace *]{align*}
+		a_{11}&x_1+a_{12}x_2+...+a_{1n}x_n &= b_1\\
+		a_{21}&x_1+a_{22}x_2+...+a_{2n}x_n &= b_2\\
+		\vdots&  &\vdots\\
+		a_{m1}&x_1+a_{m2}x_2+...+a_{mn}x_n &= b_m
+	\end{empheq}
+	This is a linear system of $m$ equations in $n$ unknowns, where $a_{ij}$ is the (numerical) coefficient of $x_j$ in equation $i$.
+	\par\textbf{Definition:} Two linear systems of $m$ equations in $n$ unknowns are \underline{equivalent} if they have the same solution set.
+	
+	\begin{theorem}
+		Let $(*)$ be the given linear system. Performing any of the following operations on $(*)$ will produce a system equivalent to $(*)$:
+		\begin{enumerate}
+			\item Interchange two of the equations.
+			\item Multiplying any equation by a \underline{non-zero} constant.
+			\item Adding a constant multiple of one equation to another.
+		\end{enumerate}
+		(These are "elementary" operations.)
+	\end{theorem}
+	
+	\begin{align*}
+		x_1+3x_2+5x_3=1\\
+		3x_1-x_2+x_3=-3\\
+		x_1+x_2+x_3=1
+	\end{align*}
+	Make the coefficient of $x_1$ in each subsequent equation 0 using the third elementary operation: 
+	\begin{align*}
+		x_1+3x_2+5x_3=1\\
+		0x_1+10x_2-14x_3=-6\\
+		0x_1-2x_2-4x_3=0
+	\end{align*}
+	Make the coefficient of $x_2$ in each subsequent equation 0 using the third elementary operation:
+	\begin{align*}
+		TODO
+	\end{align*}
+	
+\end{document}
