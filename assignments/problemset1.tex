@@ -1,0 +1,123 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{linalgjh} % useful for some things, I wanted the amatrix to use [] though.
+\usepackage{multicol}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\begin{document}
+\begin{center}
+	{\Large\textbf{MATH545: Problem Set 1}}\\
+	Grey Cole\\
+	February 02, 2026
+\end{center}
+\section{}
+
+\begin{align*}
+	\begin{augmx}{3}
+		-1 & 1 & 4 & -1\\
+		3 & -1 & 2 & 2\\
+		2 & -2 & -8 & 2
+	\end{augmx}&\\
+	{R_3 + 2R_1 \rightarrow R_3}\quad \xlrightarrow
+	\begin{augmx}{3}
+		-1 & 1 & 4 & -1\\
+		3 & -1 & 2 & 2\\
+		0 & 0 & 0 & 0
+	\end{augmx}&\\
+	{R_2 + 3R_1 \rightarrow R_2}\quad \xlrightarrow
+	\begin{augmx}{3}
+		-1 & 1 & 4 & -1\\
+		0 & 2 & 14 & -1\\
+		0 & 0 & 0 & 0
+	\end{augmx}&\\
+	\\
+	\xlrightarrow
+	\begin{linsys}{3}
+		x &- &y &- &4z &= &1\\
+		& &2y &+ &14z &= &-1\\
+		& & & &0z &= &0
+	\end{linsys}\\
+\end{align*}
+Perform back substitution:
+\vspace{-1.5em}
+\begin{multicols}{3}
+	\begin{align*}
+		z = t\\
+		\text{($z$ is a}\\ \text{parameter/free variable)}
+	\end{align*}
+	\columnbreak\\
+	\begin{align*}
+		2y + 14z &= -1\\
+		2y &= -1 - 14t\\
+		y &= -7t - \frac{1}{2}
+	\end{align*}
+	\columnbreak\\
+	\begin{align*}
+		x - y - 4z &= 1\\
+		x &= y + 4t + 1\\
+		x &= (-7t - \frac{1}{2}) + 4t + 1\\
+		x &= -3t + \frac{1}{2}
+	\end{align*}
+\end{multicols}
+\[
+	\boxed{S = \left\{(-3t + \frac{1}{2}, -7t - \frac{1}{2}, t) \; | \; t \in \reals\right\}}
+\]
+
+\section{}
+\begin{align*}
+	\begin{augmx}{3}
+		-2 & 1 & 0 & 2\\
+		3 & -1 & 2 & 1
+	\end{augmx}&\\
+	{R_1 + R_2 \rightarrow R_1}\quad \xlrightarrow \quad
+	\begin{augmx}{3}
+		1 & 0 & 2 & 3\\
+		3 & -1 & 2 & 1
+	\end{augmx}&\\
+	{R_2 - 3R_1 \rightarrow R_2}\quad \xlrightarrow \quad
+	\begin{augmx}{3}
+		1&0&2&3\\
+		0&-1&-4&-8
+	\end{augmx}&\\
+	\\
+	\xlrightarrow \quad
+	\begin{linsys}{3}
+		x &+ & &+ &2z &= &3\\
+		&- &y &- &4z &= &-8
+	\end{linsys}&\\
+\end{align*}
+Perform back substitution:
+\vspace{-1em}
+\begin{multicols}{2}
+	\begin{align*}
+		-y - 4z &= -8\\
+		y &= -4z - 8\\
+	\end{align*}
+	\columnbreak
+	\begin{align*}
+		\\
+		x + 0y + 2z &= 3\\
+		x &= 3 - 2z
+	\end{align*}
+\end{multicols}
+\vspace{-2em}
+\[
+	\boxed{S = \left\{ (3-2z, -4z+8, z) \; | \; z \in \reals \right\}}
+\]
+
+\section{}
+
+
+
+\section{}
+
+
+\end{document}
