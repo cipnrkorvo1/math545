@@ -40,10 +40,28 @@
 Let $A, B \in \mathcal{M}_{m\times n}(\reals)$. Define \underline{matrix addition} by
 \[A \matadd B = [a_{ij}] \matadd [b_{ij}] = [c_{ij}] \text{ where } c_{ij} = a_{ij} + b_{ij}\]
 \[A \in \mathcal{M}_{m\times n}(\reals), B \in \mathcal{M}_{m' \times n'}(\reals) \implies A \matadd B \text{ is NOT defined if } m \neq m' \text{ or } n \neq n'\]
-
+\begin{align*}
+	\begin{bmatrix}
+		1 & 4 & 3\\
+		3 & -3 & 0\\
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+		5&-2&-8\\
+		1&1&2
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		6&2&-5\\
+		4&-2&2
+	\end{bmatrix}
+\end{align*}
 \subsection{Scalar Multiplication}
 Let $A \in \mathcal{M}_{\mxn}(\reals)$ and $c \in \reals$.
 \[cA = [c\cdot a_{ij}]\]
+\begin{align*}
+	3 \ast \begin{bmatrix}2&1\\-3&4\\0&2\end{bmatrix} = \begin{bmatrix}6&3\\-9&12\\0&6\end{bmatrix}
+\end{align*}
 
 \subsection{Matrix Multiplication}
 Let $A = \begin{bmatrix}a_1 &\dots& a_n\end{bmatrix}$ and $\begin{bmatrix} b_1\\b_2\\\dots\\b_n \end{bmatrix}$. Define the \underline{dot product} of $A$ and $B$ by
