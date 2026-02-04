@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage{amsmath, amssymb, amsthm, empheq, mathtools, bbold}
+\usepackage{amsmath, amssymb, amsthm, empheq, mathtools, bbold, enumitem}
 
 \newcommand{\reals}{\mathbb{R}}
 
@@ -25,16 +25,6 @@
 	\end{array}
 }
 \]
-\subsection{Properties}
-\begin{enumerate}
-	\item $A \matadd B = B \matadd A$ (commutativity of addition)
-	\item $(A \matadd B) \matadd C = A \matadd (B \matadd C)$ (associativity of addition)
-	\item $d(A \matadd B) = dA \matadd dB$
-	\item $(d+e)A = dA \matadd eA$
-	\item $d(eA) = (d+e)A$
-	\item Where $\mathbb{0}_{\mxn} = [0_{ij}]$, $A \matadd \mathbb{0}_{\mxn} = A$ (which makes $\mathbb{0}_{\mxn}$ the additive identity in $\mathcal{M}_{\mxn}(\reals)$)
-	\item Where $A = [a_{ij}]$, let $-A = [-a_{ij}]$. Then $A + -A = \mathbb{0}_{\mxn}$, and so $-A$ is the (matrix) additive inverse of $A$.
-\end{enumerate}
 
 \subsection{Addition}
 Let $A, B \in \mathcal{M}_{m\times n}(\reals)$. Define \underline{matrix addition} by
@@ -56,6 +46,18 @@ Let $A, B \in \mathcal{M}_{m\times n}(\reals)$. Define \underline{matrix additio
 		4&-2&2
 	\end{bmatrix}
 \end{align*}
+
+\subsection{Matrix Addition Properties}
+\begin{enumerate}
+	\item $A \matadd B = B \matadd A$ (commutativity of addition)
+	\item $(A \matadd B) \matadd C = A \matadd (B \matadd C)$ (associativity of addition)
+	\item $d(A \matadd B) = dA \matadd dB$
+	\item $(d+e)A = dA \matadd eA$
+	\item $d(eA) = (d+e)A$
+	\item Where $\mathbb{0}_{\mxn} = [0_{ij}]$, $A \matadd \mathbb{0}_{\mxn} = A$ (which makes $\mathbb{0}_{\mxn}$ the additive identity in $\mathcal{M}_{\mxn}(\reals)$)
+	\item Where $A = [a_{ij}]$, let $-A = [-a_{ij}]$. Then $A + -A = \mathbb{0}_{\mxn}$, and so $-A$ is the (matrix) additive inverse of $A$.
+\end{enumerate}
+
 \subsection{Scalar Multiplication}
 Let $A \in \mathcal{M}_{\mxn}(\reals)$ and $c \in \reals$.
 \[cA = [c\cdot a_{ij}]\]
@@ -66,12 +68,33 @@ Let $A \in \mathcal{M}_{\mxn}(\reals)$ and $c \in \reals$.
 \subsection{Matrix Multiplication}
 Let $A = \begin{bmatrix}a_1 &\dots& a_n\end{bmatrix}$ and $\begin{bmatrix} b_1\\b_2\\\dots\\b_n \end{bmatrix}$. Define the \underline{dot product} of $A$ and $B$ by
 \[A \cdot B = a_1b_1 + a_2b_2 + \dots + a_nb_n \in \reals\]
-Let $A = \mathcal{M}_{\mxn}(\reals), B = \mathcal{M}_{n \times p}(\reals)$.
+Let $A = \mathcal{M}_{\mxn}(\reals), B = \mathcal{M}_{n \times p}(\reals)$. $A\matdot B = \mathcal{M}_{m \times p}(\reals)$. 
 \[[a_{ij}] \matdot [b_{ij}] = [c_{ij}]\]
-\[\text{where } c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j}+...+a_{in}+b_{nj}\]
+\[\text{with } c_{ij} = \sum_{k=1}^{n}a_{ik}b_{kj}  % a_{i1}b_{1j} + a_{i2}b_{2j}+...+a_{in}+b_{nj}
+\]
 \begin{center}
 	\vspace{-.8em}
 	(dot product of $i$-th row in $A$ and $j$-th column in $B$)
 \end{center}
+The $i$-th row, $j$-th column entry ($c_{ij}$) of the matrix product $A \matdot B$ is the dot product of the $i$-th row of $A$ and the $j$-th column of $B$.
+
+\subsection{Matrix Multiplication Properties}
+Let $A,A' \in \mathcal{M}_{m \times n}(\reals),\; B,B' \in \mathcal{M}_{n \times p}, \; C,C' \in \mathcal{M}_{p \times q}(\reals), d \in \reals$.\\
+Then:
+\begin{enumerate}[itemsep=0pt]
+	\item $(AB)C = A(BC)$ (associativity of matrix multiplication)
+	\item $d(AB) = A(dB) = (dA)B$
+	\item $A(B + B') = AB + AB'$
+	\item $(B + B')\cdot C = BC + B'C$
+\end{enumerate}
+
+\subsection{Matrix Transpose}
+Let $A \in \mathcal{M}_{\mxn}(\reals)$. $A^T$ is the matrix such that $[a_{ij}]^T = [c_{ji}]$, and it is shown that $A^T \in \mathcal{M}_{n \times n}(\reals)$. In other words, the dimensions of $A^T$ are the same as $A$ but swapped, with each entry reflected across the diagonal down-right.
+
+\subsection{Transpose Properties}
+\begin{enumerate}[itemsep=0pt]
+	\item $(A + A')^T = A^T + (A')^T$
+	\item $(AB)^T = B^TA^T$
+\end{enumerate}
 
 \end{document}
