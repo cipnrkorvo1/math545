@@ -1,0 +1,309 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{linalgjh} % useful for some things, I wanted the amatrix to use [] though.
+\usepackage{multicol}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\mrow}[3]{\left[
+	\begin{array}{ccc}
+	#1 & #2 & #3
+	\end{array}
+	\right]}
+\newcommand{\mcol}[3]{\left[
+	\begin{array}{c}
+	#1\\
+	#2\\
+	#3
+	\end{array}
+	\right]}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\begin{document}
+	\begin{center}
+		{\Large\textbf{MATH545: Problem Set 2}}\\
+		\large Grey Cole\\
+		February 06, 2026
+	\end{center}
+\section{}
+\subsection{}
+\begin{align*}
+	\begin{augmx}{2}
+		a&1&1\\2&a-1&1
+	\end{augmx}
+	\xlrightarrow
+	\begin{linsys}{2}
+		ax &+ &y &= &1\\
+		2x &+ &(a-1)y &= &1
+	\end{linsys}
+	\xlrightarrow
+	\begin{array}{c}
+		y = 1-ax\\
+		2x + (a-1)(1-ax) = 1
+	\end{array}
+\end{align*}
+Solve for $x$ first, in terms of $a$:
+\begin{align*}
+	2x + a - 1 - a^2x + ax &= 1\\
+	(-a^2+a+2)x+a&=2\\
+	(2-a)(a+1)x&=2-a\\
+	x&=\frac{1}{a+1}
+\end{align*}
+Then solve for $y$, in terms of $a$ with back substitution:
+\begin{align*}
+	y &= 1 - a(\frac{1}{a+1})\\
+	y &= 1 - \frac{a}{a+1}
+\end{align*}
+The only value of $a$ that causes an invalid solution is $a=-1$. This non-solution is derived from the values of $x$ and $y$ calculated, but plugging it into the original system also causes a contradiction. So, the values of $a$ that make the linear system consistent are all real numbers except $-1$, i.e.
+\[\boxed{
+	a \in \reals \setminus \{-1\}.
+}\]
+\subsection{}
+In most cases, when it is consistent the linear system has a unique solution. However, we can discover a case where the system has infinitely many solutions when we set the two equations equal to each other:
+\begin{align*}
+	ax + y &= 2x + (a - 1)y\\
+	ax &= 2x + ay - 2y\\
+	ax - ay &= 2x - 2y\\
+	a(x - y) &= 2(x - y)\\
+	a &= 2
+\end{align*}
+Plugging in $a=2$ to the system creates $0=0$, which means that there are an infinite number of solutions when $a = 2$.
+\subsection{}
+If we plug in $a = 0$,
+\begin{align*}
+	0x + y = 1 &\qquad& 2x + (0 - 1)y = 1\\
+	\boxed{y = 1}	&\qquad&	2x - y = 1\\
+	&\qquad&	2x - 1 = 1\\
+	&\qquad&	2x = 1\\
+	&\qquad&	\boxed{x = \frac{1}{2}}
+\end{align*}
+In particular, the solution to the system when $a=0$ is $(\frac{1}{2}, {1})$.
+
+\section{}
+\subsection{}
+\begin{align*}
+	&&
+	\begin{bmatrix}
+		0&2&1\\1&-3&-3\\1&2&-3
+	\end{bmatrix}&\\
+	\begin{array}{c}
+		{R_1 + 2R_3 \rightarrow R_1}\\
+		{R_2 - R_3 \rightarrow R_2}
+	\end{array}
+	&\xlrightarrow&
+	\begin{bmatrix}
+		2&6&-5\\0&-5&0\\1&2&-3
+	\end{bmatrix}&\\
+	{R_1-2R_3\rightarrow R_1} &\xlrightarrow&
+	\begin{bmatrix}
+		0&0&1\\0&-5&0\\1&2&-3
+	\end{bmatrix}&\\
+	\begin{array}{c}
+		R_3 \leftrightarrow R_1\\
+		-5R_2 \rightarrow R_2
+	\end{array}
+	&\xlrightarrow &
+	\boxed{
+	\begin{bmatrix}
+		1&2&-3\\0&1&0\\0&0&1
+	\end{bmatrix}
+	}&
+\end{align*}
+\subsection{}
+\begin{align*}
+	&&
+	\begin{bmatrix}
+		-4&-2&-1\\-2&-3&0
+	\end{bmatrix}&\\
+	{R_1-2R_2\rightarrow R_1} &\xlrightarrow&
+	\begin{bmatrix}
+		0&4&-1\\-2&-3&0
+	\end{bmatrix}&\\
+	\begin{array}{c}
+		-\frac{1}{2}R_2 \rightarrow R_1\\
+		\frac{1}{4}R_1 \rightarrow R_2
+	\end{array}
+	&\xlrightarrow&
+	\boxed{
+	\begin{bmatrix}
+		1&\frac{3}{2}&0\\
+		0&1&-\frac{1}{4}
+	\end{bmatrix}
+	}&
+\end{align*}
+
+\section{}
+\subsection{}
+\begin{align*}
+	\begin{bmatrix}
+		3-2&2+1&0+3\\
+		1+2&2-4&7+3\\
+		1+0&6+0&0-1
+	\end{bmatrix}
+	\xlrightarrow
+	\begin{bmatrix}
+		1&3&3\\3&-2&10\\1&6&-1
+	\end{bmatrix}
+\end{align*}
+\subsection{}
+\begin{align*}
+	\begin{bmatrix}
+		-6+4&3+4&9+6\\
+		-2-8&1-8&3-12-7\\
+		-2+12&1+12&3+18
+	\end{bmatrix}
+	\xlrightarrow
+	\begin{bmatrix}
+		-2&7&15\\-10&-7&-16\\10&13&21
+	\end{bmatrix}
+\end{align*}
+\subsection{}
+\begin{align*}
+	\begin{bmatrix}
+		9+4&6-2&0-6\\
+		3-4&-12-4&21-6\\
+		3+0&18+0&0+2
+	\end{bmatrix}
+	\xlrightarrow
+	\begin{bmatrix}
+		13&4&-6\\-1&-16&15\\3&18&2
+	\end{bmatrix}
+\end{align*}
+\subsection{}
+\begin{align*}
+	%&  & &  & &  & &  & &  & &  &\\
+	&  &\begin{array}{c} 2AB\\
+	\begin{bmatrix}
+		-4&14&30\\-20&-14&-32\\20&26&42
+	\end{bmatrix}
+	\end{array}&
+	&-&
+	&\begin{array}{c} A^T\\
+	\begin{bmatrix}
+		3&1&1\\2&-4&6\\0&7&0
+	\end{bmatrix}
+	\end{array}&
+	&=&
+	&\begin{array}{c}\\
+		\begin{bmatrix}
+		-7&13&29\\-22&-10&-38\\20&19&42
+	\end{bmatrix}\end{array}&  &
+\end{align*}
+
+\section{}
+\[
+	A_mA_k =
+\begin{bmatrix}
+	1-m & -m\\m & 1+m
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+	1-k&-k\\k&1+k
+\end{bmatrix}
+\]
+\[
+\hspace{-5em}
+\begin{array}{rcl}
+	\left[\begin{array}{cc}1-m & -m\end{array}\right]&\cdot
+	\left[\begin{array}{c}
+		1-k\\k
+	\end{array}\right]
+	&= (1-m)(1-k) - mk = 1-m-k+mk-mk=1-(m+k)
+	\\
+	\left[\begin{array}{cc}
+		1-m&-m
+	\end{array}\right]&\cdot
+	\left[\begin{array}{c}
+		-k\\1+k
+	\end{array}\right]
+	&= -k(1-m)-m(1+k)=-k+mk-m-mk=-(m+k)
+	\\
+	\left[\begin{array}{cc}
+		m&1+m
+	\end{array}\right]&\cdot
+	\left[\begin{array}{c}
+		1-k\\k
+	\end{array}\right]
+	&= m(1-k)+k(1+m)=m-mk+k+mk=(m+k)
+	\\
+	\left[\begin{array}{cc}
+		m&1+m
+	\end{array}\right]&\cdot
+	\left[\begin{array}{c}
+		-k\\1+k
+	\end{array}\right]
+	&= -km + (1+m)(1+k)=-km+1+m+k+mk=1+(m+k)
+\end{array}
+\]
+\[
+= \begin{bmatrix}
+	1-(m+k) & -(m+k) \\ (m+k) & 1+(m+k)
+\end{bmatrix}
+= A_{m+k}
+\]
+Therefore $A_mA_k = A_{m+k}$.
+
+\section{}
+\[
+\hspace{-5em}
+\begin{array}{cccc}
+\begin{array}{c}
+	A = \begin{bmatrix}2&1\\1&1\end{bmatrix}\\
+	\\
+	M = \begin{bmatrix}a&b\\c&d\end{bmatrix}
+\end{array}
+\begin{array}{l}
+	A \cdot M\\
+	\left[\begin{array}{cc}2&1\end{array}\right]\cdot \left[\begin{array}{c}a\\c\end{array}\right] = 2a+c\\
+	\left[\begin{array}{cc}2&1\end{array}\right]\cdot \left[\begin{array}{c}b\\d\end{array}\right] = 2b+d\\
+	\left[\begin{array}{cc}1&1\end{array}\right]\cdot \left[\begin{array}{c}a\\c\end{array}\right] = a+c\\
+	\left[\begin{array}{cc}1&1\end{array}\right]\cdot \left[\begin{array}{c}b\\d\end{array}\right] = b+d
+\end{array}
+\begin{array}{l}
+	M \cdot A\\
+	\left[\begin{array}{cc}a&b\end{array}\right]\cdot \left[\begin{array}{c}2\\1\end{array}\right] = 2a+b\\
+	\left[\begin{array}{cc}a&b\end{array}\right]\cdot \left[\begin{array}{c}1\\1\end{array}\right] = a+b\\
+	\left[\begin{array}{cc}c&d\end{array}\right]\cdot \left[\begin{array}{c}2\\1\end{array}\right] = 2c+d\\
+	\left[\begin{array}{cc}c&d\end{array}\right]\cdot \left[\begin{array}{c}1\\1\end{array}\right] = c+d
+\end{array}
+\begin{array}{l}
+	\\
+	2a+c = 2a+b \rightarrow \boxed{c = b}\\
+	\\
+	2b+d = a + b \rightarrow \boxed{a = b + d}\\
+	\\
+	a+c = 2c+d \rightarrow \boxed{a = c + d}\\
+	\\
+	b+d = c + d \rightarrow \boxed{b = c}
+\end{array}
+\end{array}
+\]
+\\
+Using these four equalities, we can simplify all four variables to just two:
+\[
+\hspace{-3em}
+\begin{array}{cc}
+	b = c & a = c + d
+\end{array}
+\Rightarrow
+\begin{bmatrix}
+	c+d & c\\c & d
+\end{bmatrix}
+\Rightarrow
+\boxed{
+M = \begin{bmatrix}
+	n+k & n\\n & k
+\end{bmatrix}
+\text{for any } n, k \in \reals
+}
+\]
+
+\end{document}
