@@ -3,6 +3,10 @@
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{amsmath, amssymb, amsthm, empheq, mathtools, bbold, enumitem}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem*{fact}{Fact}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
 \newcommand{\reals}{\mathbb{R}}
 
 \newcommand{\matadd}{+_{\text{mat}}}
@@ -83,18 +87,78 @@ Let $A,A' \in \mathcal{M}_{m \times n}(\reals),\; B,B' \in \mathcal{M}_{n \times
 Then:
 \begin{enumerate}[itemsep=0pt]
 	\item $(AB)C = A(BC)$ (associativity of matrix multiplication)
+	\item $AB \neq BA$ (multiplication is NOT commutative)
 	\item $d(AB) = A(dB) = (dA)B$
 	\item $A(B + B') = AB + AB'$
 	\item $(B + B')\cdot C = BC + B'C$
 \end{enumerate}
 
 \subsection{Matrix Transpose}
-Let $A \in \mathcal{M}_{\mxn}(\reals)$. $A^T$ is the matrix such that $[a_{ij}]^T = [c_{ji}]$, and it is shown that $A^T \in \mathcal{M}_{n \times n}(\reals)$. In other words, the dimensions of $A^T$ are the same as $A$ but swapped, with each entry reflected across the diagonal down-right.
+Let $A \in \mathcal{M}_{\mxn}(\reals)$. $A^T$ is the matrix such that $[a_{ij}]^T = [a_{ji}]$, and it is shown that $A^T \in \mathcal{M}_{n \times m}(\reals)$. In other words, the dimensions of $A^T$ are the same as $A$ but swapped, with each entry reflected across the diagonal down-right.
 
 \subsection{Transpose Properties}
 \begin{enumerate}[itemsep=0pt]
-	\item $(A + A')^T = A^T + (A')^T$
+	\item $(A + B)^T = A^T + B^T$
 	\item $(AB)^T = B^TA^T$
+	\item $(A^T)^T = A$
+	\item $(cA)^T = c(A^T)$
 \end{enumerate}
+
+\subsection{Matrix Inverse}
+Motivation: to solve equations in the form of $AX = B$ where
+\[
+\begin{array}{ccc}
+	A & \times \begin{bmatrix}x_1\\\vdots\\x_n\end{bmatrix} =& B\\
+	m\times n & n \times 1 & m \times 1
+\end{array}
+\]
+And in fact, it is most useful to solve equations where $m = n$ because uneven matrices do not have unique solutions or have extra variables.
+\[
+	\begin{array}{rl}
+		AX = B \xlrightarrow & A^{-1}(AX) = A^{-1}B\\
+		& (A^{-1})X = A^{-1}B\\
+		& I_nX = A^{-1}B\\
+		& X = A^{-1}B
+	\end{array}
+\]
+First we must define what $I_n$, the \textit{identity matrix}, means.\\
+Let $I_n \in \mathcal{M}_{n\times n}(\reals)$ and $I_n = [e_{ij}]$ where $e_{ij} = 
+\begin{cases}
+	1, & i = j\\
+	0, & i \neq j
+\end{cases}
+$
+\[
+\begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0\\
+	0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 1
+\end{bmatrix}\cdot\begin{bmatrix}
+	a\\b\\c\\d
+\end{bmatrix} = \begin{bmatrix}
+	a\\b\\c\\d
+\end{bmatrix}
+\]
+\subsubsection{Identity Matrix Properties/"Facts"}
+\begin{enumerate}[itemsep=0pt]
+	\item $A \in \mathcal{M}_{\mxn}(\reals) \Rightarrow I_m \cdot A = A$ and $A \cdot I_n = A$
+	\item $A \in \mathcal{M}_{n\times n}(\reals) \Rightarrow I_nA = A = AI_n$
+\end{enumerate}
+\begin{theorem}
+	Let A = $\left[\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right]$; then $A$ has multiplicative inverse $A^{-1}$ if and only if $ad-bc=0$, and $A^{-1} = \frac{1}{ad-bc}\left[\begin{smallmatrix}d&-b\\-c&a\end{smallmatrix}\right]$
+\end{theorem}
+\begin{proof}
+	\begin{align}
+		&\quad\begin{bmatrix}a&b\\c&d\end{bmatrix}
+		\left(\frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\right)\\
+		=&\quad \frac{1}{ad-bc}\left(\begin{bmatrix}a&b\\c&d\end{bmatrix}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}\right)\\
+		=&\quad \frac{1}{ad-bc}\left(\begin{bmatrix}ad-bc&0\\0&ad-bc\end{bmatrix}\right)\\
+		=&\quad \begin{bmatrix}1&0\\0&1\end{bmatrix}
+	\end{align}
+\end{proof}
+\begin{fact}
+	$A$ has inverse $A^{-1}$ if and only if $A$ can be row-reduced to the identity $I_n$.
+\end{fact}
 
 \end{document}
