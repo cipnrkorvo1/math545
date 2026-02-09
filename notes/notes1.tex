@@ -5,6 +5,8 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem*{fact}{Fact}
+\newtheorem*{note}{Note}
+\newtheorem{definition}{Definition}
 
 \newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
 \newcommand{\reals}{\mathbb{R}}
@@ -13,6 +15,9 @@
 \newcommand{\matdot}{\cdot_{\text{mat}}}
 
 \newcommand{\mxn}{m \times n}
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 
 \begin{document}
 \section{Matrix Algebra}
@@ -122,12 +127,13 @@ And in fact, it is most useful to solve equations where $m = n$ because uneven m
 	\end{array}
 \]
 First we must define what $I_n$, the \textit{identity matrix}, means.\\
+\subsubsection{Identity Matrix}
 Let $I_n \in \mathcal{M}_{n\times n}(\reals)$ and $I_n = [e_{ij}]$ where $e_{ij} = 
 \begin{cases}
 	1, & i = j\\
 	0, & i \neq j
 \end{cases}
-$
+$ and $n \geq 1$
 \[
 \begin{bmatrix}
 	1 & 0 & 0 & 0\\
@@ -146,6 +152,7 @@ $
 	\item $A \in \mathcal{M}_{n\times n}(\reals) \Rightarrow I_nA = A = AI_n$
 \end{enumerate}
 \begin{theorem}
+	\label{abcdinverse}
 	Let A = $\left[\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right]$; then $A$ has multiplicative inverse $A^{-1}$ if and only if $ad-bc=0$, and $A^{-1} = \frac{1}{ad-bc}\left[\begin{smallmatrix}d&-b\\-c&a\end{smallmatrix}\right]$
 \end{theorem}
 \begin{proof}
@@ -158,7 +165,46 @@ $
 	\end{align}
 \end{proof}
 \begin{fact}
-	$A$ has inverse $A^{-1}$ if and only if $A$ can be row-reduced to the identity $I_n$.
+	A matrix $A \in \mathcal{M}_{n\times n}(\reals)$ has inverse $A^{-1}$ (is \underline{invertible}) if and only if $A$ can be row-reduced to the identity $I_n$ (the reduced echelon of $A$ is $I_n$).
 \end{fact}
+\begin{fact}
+Let $A \in \mathcal{M}_{\mxn}(\reals)$ and $B \in \mathcal{M}_{n \times p}(\reals).$
+\[
+AB = A\left[b_{-1}\; b_{-2}\; ...\; b_{-p}\right]
+= \left[Ab_{-1}\; Ab_{-2}\; ...\; Ab_{-p}\right]
+\]
+where $b_{-j}$ is the $j$-th column of $B$.
+\end{fact}
+\begin{definition}[Identity Matrix Column Notation]
+	Let $A = [a_j] \in \mathcal{M}_{n\times n}(\reals)$ and $A\cdot B = I_n$.
+	\[
+	[Ab_{-1} \; Ab_{-2} \; ... \; Ab_{-n}] = A [b_{-1} \; ... \; b_{-n}] = \bmat{1&0&...&0\\0&1&...&0\\0&\vdots& &0\\0&0&...&1} = [e_1 \; e_2 \; ... \; e_n]
+	\]
+	where $e_j$ is the $j$-th column of $I_n.$
+	\[
+	A\underline{b}_j = e_j \implies [A \; | \; e_j]
+	\]
+\end{definition}
+\begin{note}
+	Let $A \in \letmatrix{n}{n}.$ 
+	\begin{align}
+	[A \; | \; I_n] &= [I_n \; | \; A^{-1}]
+	\\
+	[A \; | \; \begin{smallmatrix}1&0\\0&1\end{smallmatrix}]
+	&=
+	[\begin{smallmatrix}1&0\\0&1\end{smallmatrix} \; | \; A^{-1}]
+	\label{apipeidentity}
+	\end{align}
+	This equality can be used to convert an invertible matrix $A$ into its inverse $A^-1$ (though this is merely a proof of concept for $n=2$, eq. \ref{apipeidentity}; use the equivalent matrix from Theorem \ref{abcdinverse})
+\end{note}
+\begin{fact}
+	If $A \in \letmatrix{m}{n}$ has an inverse, then that inverse is unique.
+\end{fact}
+\begin{proof}
+	Suppose $B,B'$ are inverses for $A$. Then
+	\[
+	B = BI_n = B(A B') = (BA)B' = I_nB' = B'
+	\]
+\end{proof}
 
 \end{document}
