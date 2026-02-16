@@ -18,6 +18,13 @@
 \newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
 
 \newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
 
 \begin{document}
 \section{Matrix Algebra}
@@ -207,4 +214,19 @@ where $b_{-j}$ is the $j$-th column of $B$.
 	\]
 \end{proof}
 
+\subsection{Determinants}
+A matrix $A$ is invertible if and only if the \textit{determinant} is not equal to 0.\\\\
+The \textbf{determinant} of a $2\times 2$ matrix $A$, denoted by $|A|$ or det$(A)$, is given by
+\[
+	|A| = \text{det}(A) = \detmat{a&b\\c&d} = ad - bc
+\]
+\subsubsection{Minors and Cofactors of a Matrix}
+If $A$ is a square matrix, than the \textbf{minor} $M_{ij}$, associated with the entry $a_{ij}$, is the determinant of the $(n - 1)\times (n - 1)$ matrix obtained by deleting row $i$ and column $j$ from the matrix $A$. The \textbf{cofactor} of $a_{ij}$ is $C_{ij} = (-1)^{i+j}M_{ij}.$ 
+\subsubsection{Determinant of a Square Matrix}
+If $A$ is an $n \times n$ matrix, then
+\[
+	\text{det}(A) = a_{11}C_{11} + a_{12}C_{12} + \dots + a_{1n}C_{1n}
+\]
 \end{document}
+
+
