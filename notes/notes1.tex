@@ -16,6 +16,7 @@
 
 \newcommand{\mxn}{m \times n}
 \newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+\newcommand{\rowop}{\mathcal{R}}
 
 \newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\detmat}[1]{
@@ -25,6 +26,8 @@
 	\end{matrix}
 	\hspace{0.5em}\right|
 }
+
+% TODO: match sections with textbook sectioning
 
 \begin{document}
 \section{Matrix Algebra}
@@ -227,6 +230,35 @@ If $A$ is an $n \times n$ matrix, then
 \[
 	\text{det}(A) = a_{11}C_{11} + a_{12}C_{12} + \dots + a_{1n}C_{1n}
 \]
+\subsubsection{More on Elementary Row Operations}
+\begin{itemize}[itemsep=0pt, font=\sffamily\bfseries]
+	\item[Type 1] Transpose one row with another. \textit{Changes the sign of the determinant.}
+	\item[Type 2] Multiply a row by a constant nonzero factor. \textit{Multiplies the determinant by the same factor.}
+	\item[Type 3] Add a constant multiple of a row to another. \textit{Does not affect the determinant.}
+\end{itemize}
+\subsubsection{Determinants Facts}
+\begin{enumerate}[itemsep=0pt]
+	\item A matrix with any row or col which is all zeroes has det $= 0$.
+	\item A matrix with 2 identical rows or 2 identical columns has det $= 0$.
+	\item The determinant of any (upper OR lower) triangular matrix is the product of its diagonal entries.
+	\item The determinant of any diagonal matrix is the product of its diagonal entries.
+	\item Let $A, B \in \letmatrix{n}{n}$. Then det$(AB) = $det$(A)$det$(B)$.
+	\item $A \in \letmatrix{n}{n}$ is invertible $\iff$ det$(A) \neq 0$.
+	\item $A \in \letmatrix{n}{n}$ is invertible $\iff$ the reduced row echelon form of $A$ is $I_n$.
+	\item Suppose $A \in \letmatrix{n}{n}$ is invertible. Then det$(A^{-1}) = \frac{1}{\text{det}(A)}$.
+\end{enumerate}
+
+\subsection{Elementary Matrices and \textit{LU} Factorization}
+%%%
+\begin{definition}[Elementary Matrix]
+	An \textbf{elementary matrix} is any matrix that can be obtained from the identity matrix by performing a single elementary row operation.
+\end{definition}
+\begin{theorem}
+	\label{R(A)}
+	Let $A$ be an $m \times n$ matrix and $E$ the elementary matrix obtained from the $m \times m$ identity matrix $I$ by a single row operation $\mathcal{R}$. Denote by  $\mathcal{R}(A)$ the result of performing the row operation on $A$. Then $\mathcal{R}(A) = E(A)$.
+\end{theorem}
+\par By repeated application of Theorem \ref{R(A)}, a sequence of row operations can be performed on a matrix $A$ by successively multiplying $A$ by the corresponding elementary matrices. Specifically, let $E_i$ be the elementary matrix corresponding to the row operation $\rowop_i$ with $1 \leq i \leq k$. Then
+\[\rowop_k \cdots \rowop_2(\rowop_1(A)) = E_k \cdots E_2E_1A\]
 \end{document}
 
 
