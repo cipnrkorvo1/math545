@@ -1,12 +1,27 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
-\usepackage{amsmath, amssymb, amsthm, empheq, mathtools, bbold, enumitem}
+\usepackage{amsmath, amssymb, empheq, mathtools, bbold, enumitem}
+\usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
+%\usepackage{framed}
+%\usepackage[amsthm,framed,thmmarks]{ntheorem}
 
+%\newframedtheorem{frm-thm}{Theorem}
 \newtheorem{theorem}{Theorem}
 \newtheorem*{fact}{Fact}
 \newtheorem*{note}{Note}
 \newtheorem{definition}{Definition}
+
+\surroundwithmdframed[]{theorem}
+\newenvironment{frmthm}{
+	\begin{mdframed}
+	\begin{theorem}
+}{		
+	\end{theorem}
+	\end{mdframed}
+}
+
 
 \newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
 \newcommand{\reals}{\mathbb{R}}
@@ -249,16 +264,47 @@ If $A$ is an $n \times n$ matrix, then
 \end{enumerate}
 
 \subsection{Elementary Matrices and \textit{LU} Factorization}
+\subsubsection{Elementary Matrices}
 %%%
 \begin{definition}[Elementary Matrix]
 	An \textbf{elementary matrix} is any matrix that can be obtained from the identity matrix by performing a single elementary row operation.
 \end{definition}
+\textbf{Reminder of Elementary Row Operations}
+\begin{itemize}[itemsep=0pt, font=\sffamily\bfseries]
+	\item[Type 1] Interchange two rows.
+	\item[Type 2] Multiply a row by a constant nonzero factor.
+	\item[Type 3]Add a constant multiple of a row to another. 
+\end{itemize}
 \begin{theorem}
 	\label{R(A)}
 	Let $A$ be an $m \times n$ matrix and $E$ the elementary matrix obtained from the $m \times m$ identity matrix $I$ by a single row operation $\mathcal{R}$. Denote by  $\mathcal{R}(A)$ the result of performing the row operation on $A$. Then $\mathcal{R}(A) = E(A)$.
 \end{theorem}
-\par By repeated application of Theorem \ref{R(A)}, a sequence of row operations can be performed on a matrix $A$ by successively multiplying $A$ by the corresponding elementary matrices. Specifically, let $E_i$ be the elementary matrix corresponding to the row operation $\rowop_i$ with $1 \leq i \leq k$. Then
+\begin{proof}
+	By repeated application of Theorem \ref{R(A)}, a sequence of row operations can be performed on a matrix $A$ by successively multiplying $A$ by the corresponding elementary matrices. Specifically, let $E_i$ be the elementary matrix corresponding to the row operation $\rowop_i$ with $1 \leq i \leq k$. Then
 \[\rowop_k \cdots \rowop_2(\rowop_1(A)) = E_k \cdots E_2E_1A\]
+\end{proof}
+\subsubsection{The Inverse of an Elementary Matrix}
+\begin{theorem}
+	Let $E$ be an $n \times n$ elementary matrix. Then $E$ is invertible. Moreover, its inverse is also an elementary matrix.
+	\begin{proof}
+		Every type 1 elementary matrix is its own inverse: $E_1^{-1} = E_1$. Every type 2 elementary matrix is invertible with the inverse also a type 2. If $E_3$ adds $c$ times row $i$ to row $j$, then $E_3^{-1}$ exists and adds $-c$ times row $i$ to row $j$. Moreover, each of these operations maintains a nonzero determinant.
+	\end{proof}
+\end{theorem}
+\begin{theorem}
+	Let $A$ and $B$ be $m \times n$ matrices. The matrix $A$ is row equivalent to $B$ if and only if there are elementary matrices $E_1,E_2,...,E_k$ such that $B = E_kE_{k-1}\cdots E_2E_1A.$
+\end{theorem}
+\begin{theorem}
+	An $n \times n$ matrix $A$ is invertible if and only if it can be written as the product of elementary matrices.
+	\begin{proof}
+		First assume that there are elementary matrices $E_1,E_2,...,E_k$ such that
+		\[A = E_1E_2\cdots E_{k-1}E_k\]
+		We claim that the matrix $B = E_k^{-1}\cdots E_2^{-1}E_1^{-1}$ is the inverse of $A$. To show this, we multiply both sides of $A = E_1E_2\cdots E_{k-1}E_k$ by $B$ to obtain
+		\[
+		BA = (E_k^{-1}\cdots E_2^{-1}E_1^{-1})A = (E_k^{-1}\cdots E_2^{-1}E_1^{-1})(E_1E_2\cdots E_{k-1}E_k) = I
+		\]
+		establishing the claim.
+	\end{proof}
+\end{theorem}
 \end{document}
 
 
