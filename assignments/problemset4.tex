@@ -1,0 +1,155 @@
+\documentclass[]{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+\usepackage{multicol, enumitem}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\mrow}[3]{\left[
+	\begin{array}{ccc}
+		#1 & #2 & #3
+	\end{array}
+	\right]}
+\newcommand{\mcol}[3]{\left[
+	\begin{array}{c}
+		#1\\
+		#2\\
+		#3
+	\end{array}
+	\right]}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\extaugmx}[2]{
+	\left[\begin{matrix}
+		#1
+	\end{matrix}\right|\left.\begin{matrix}
+		#2
+	\end{matrix}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
+
+\begin{document}
+	\begin{center}
+		{\Large\textbf{MATH545: Problem Set 4}}\\
+		\large Grey Cole\\
+		March 4, 2026
+	\end{center}
+	\section{}
+	\begin{align*}
+		\detmat{-1&-1&-3&2\\-3&-3&-1&-1\\1&-1&0&0\\-1&-2&2&1} = -1 \detmat{-3&-1&-1\\-1&0&0\\-2&2&1} - 
+		\begin{aligned}[t] &-1 \detmat{-3&-1&-1\\1&0&0\\-1&2&1} + \\
+		&\hspace{-2cm}-3 \detmat{-3&-3&-1\\1&-1&0\\-1&-2&1} - 2 \detmat{-3&-3&-1\\1&-1&0\\-1&-2&2}
+		\end{aligned}
+	\end{align*}
+	Solve each determinant independently:
+	\begin{align*}
+		\detmat{-3&-1&-1\\-1&0&0\\-2&2&1} &= -3\detmat{0&0\\2&1}--1\detmat{-1&0\\-2&1}+-1\detmat{-1&0\\-2&2}\\
+		&= -3(0) + 1(-1) - 1(-2) = -1 + 2 = \underline{1}
+	\end{align*}
+	\begin{align*}
+		\detmat{-3&-1&-1\\1&0&0\\-1&2&1} &= -3\detmat{0&0\\2&1} --1\detmat{1&0\\-1&1} + -1\detmat{1&0\\-1&2}\\
+		&= -3(0) + 1(1) - 1(2) = 1 - 2 = \underline{-1}
+	\end{align*}
+	\begin{align*}
+		\detmat{-3&-3&-1\\1&-1&0\\-1&-2&1} &= -3\detmat{-1&0\\-2&1} --3 \detmat{1&0\\-1&1} + -1\detmat{1&-1\\-1&-2}\\
+		&= -3(-1) + 3(1) - 1(-2 - 1) = 3 + 3 + 3 = \underline{9}
+	\end{align*}
+	\begin{align*}
+		\detmat{-3&-3&-1\\1&-1&0\\-1&-2&2} &= -3\detmat{-1&0\\-2&2} --3\detmat{1&0\\-1&2} +-1\detmat{1&-1\\-1&2}\\
+		&= -3(-2) + 3(2) - 1(-2-1) = 6 + 6 + 3 = \underline{15}
+	\end{align*}
+	Plug in the determinant for each submatrix into the original equation:
+	\begin{align*}
+		-1(1) + 1(-1) -3(9) - 2(15) = -1 - 1 - 27 - 30 = \boxed{-59}
+	\end{align*}
+	\section{}
+	\begin{enumerate}[label=\alph*)]
+		\item \[ A = \bmat{1&3&-2\\2&5&1\\2&6&-4} \]
+		\item \begin{align*} 
+			\det(A) &= 1\detmat{5&1\\6&-4} - 3\detmat{2&1\\2&-4} - 2 \detmat{2&5\\2&6}\\
+			&= 1(-20 - 6) - 3(-8-2) - 2(12-10)\\
+			&= -26+30-4 = \boxed{0}
+		\end{align*}
+		\item Because $\det(A) = 0$, we know the system does not have a unique solution.
+		\item Multiply the augmented matrix representing the system by the elementary matrix corresponding to row operations that allow for back substitution (puts $A$ into row echelon form):
+		\begin{gather*}
+		\begin{aligned}
+			\bmat{1&0&0\\-2&1&0\\-2&0&1} \begin{augmx}{3}
+				1&3&-2&-1\\2&5&1&2\\2&6&-4&-2
+			\end{augmx} = \begin{augmx}{3}
+				1&3&-2&-1\\0&-1&5&4\\0&0&0&0
+			\end{augmx}
+		\end{aligned}\\
+		\downarrow \\
+		\begin{aligned}
+			x + 3y - 2z = -1 &\rightarrow x = -3(5z - 4) + 2z - 1 = -13z + 11 \\
+			-y + 5z = 4 &\rightarrow y = 5z - 4 \\
+			0z = 0 &\rightarrow \text{$z$ is a parameter}
+		\end{aligned}\\
+		\hspace{-1cm}\text{The entire solution set $S$ for this system is } \boxed {S = \{(-13z + 11, 5z-4, z) \; | \; z \in \reals\} }
+		\end{gather*}
+	\end{enumerate}
+	\section{}
+	\begin{gather*}
+		0 = \detmat{1&2&x\\3&-1&2\\0&a&y} = 1\detmat{-1&2\\a&y} - 2\detmat{3&2\\0&y} + x\detmat{3&-1\\0&a}\\
+		= 1(-y - 2a) - 2(3y) + x(3a)\\
+		\begin{aligned}
+			0 &= -y -2a - 6y + 3ax\\
+			7y &= 3ax - 2a\\
+			y &= \boxed{\frac{3a}{7}}\:x - \frac{2a}{7}
+		\end{aligned}
+		\begin{array}{c}\\ \\ \rightarrow \end{array}
+		\quad
+		\begin{aligned}\\
+			\frac{3a}{7} = 1\\
+			3a = 7\\
+			\boxed{a = \frac{7}{3}}
+		\end{aligned}
+	\end{gather*}
+	\section{}
+	Put into $Ax = b$ form:
+	\[ \bmat{1&-2&1\\2&-3&6\\-2&4&-1}\bmat{x_1\\x_2\\x_3} = \bmat{-1\\8\\4} \]
+	Using $A = LU$, find $L^{-1}A = U$ where $L^{-1} = L_1^{-1}L_2^{-1}\cdots L_k^{-1} = E_kE_{k-1}\cdots E_1$
+	\[ L^{-1}A = \bmat{1&0&0\\-2&1&0\\2&0&1} \bmat{1&-2&1\\2&-3&6\\-2&4&-1} = \bmat{1 & -2 & 1\\0&1&4\\0&0&1} = U\]
+	First solve $Ly = b$ for $y$ (where $y = Ux$ from $A = LU \rightarrow LUx = b$):
+	\[ Ly = b \longrightarrow \bmat{1&0&0\\2&1&0\\-2&0&1}\bmat{y_1\\y_2\\y_3} = \bmat{y_1\\2y_1 + y_2\\-2y_1 + y_3} = \bmat{-1\\8\\4} \]
+	\begin{gather*}
+	\begin{aligned}
+		& y_1 = -1\\
+		& 2(-1) + y_2 = 8 \rightarrow y_2 = 8 + 2 = 10\\
+		& 2(-1) + y_3 = 4 \rightarrow y_3 = 4 - 2 = 2
+	\end{aligned} \quad \longrightarrow \quad \bmat{y_1\\y_2\\y_3} = \bmat{-1\\10\\2}
+	\end{gather*}
+	Now that we have $y$, we can solve $y = Ux$ for $x$.
+	\[ Ux = y \longrightarrow \bmat{1&-2&1\\0&1&4\\0&0&1}\bmat{x_1\\x_2\\x_3} = \bmat{x_1 - 2x_2 + x_3\\x_2 + 4x_3\\x_3} = \bmat{-1\\10\\2} \]
+	\begin{gather*}
+	\begin{aligned}
+		& x_1 - 2x_2 + x_3 = -1 \rightarrow x_1 = 2(2) - 2 - 1 \rightarrow x_1 = 1\\
+		& x_2 + 4x_3 = 10 \rightarrow x_2 - 4(2) = 10 \rightarrow x_2 = 2\\
+		& x_3 = 2
+	\end{aligned} \quad \longrightarrow \quad
+	\bmat{x_1\\x_2\\x_3} = \bmat{1\\2\\2}
+	\end{gather*}
+	Therefore the solution of this linear system is $\boxed{(1, 2, 2)}$.
+	
+\section{}
+\end{document}

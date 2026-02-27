@@ -22,7 +22,6 @@
 	\end{mdframed}
 }
 
-
 \newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
 \newcommand{\reals}{\mathbb{R}}
 
@@ -285,11 +284,27 @@ If $A$ is an $n \times n$ matrix, then
 \end{proof}
 \subsubsection{The Inverse of an Elementary Matrix}
 \begin{theorem}
+	\label{inv-elementary}
 	Let $E$ be an $n \times n$ elementary matrix. Then $E$ is invertible. Moreover, its inverse is also an elementary matrix.
 	\begin{proof}
 		Every type 1 elementary matrix is its own inverse: $E_1^{-1} = E_1$. Every type 2 elementary matrix is invertible with the inverse also a type 2. If $E_3$ adds $c$ times row $i$ to row $j$, then $E_3^{-1}$ exists and adds $-c$ times row $i$ to row $j$. Moreover, each of these operations maintains a nonzero determinant.
 	\end{proof}
 \end{theorem}
+The inverse of each elementary matrix operation can be summarized as such:
+\begin{itemize}[itemsep=0pt, font=\sffamily\bfseries]
+	\item[Type 1]
+	\begin{align*}
+		& \rowop_1 = R_2 \leftrightarrow R_3 & E_1 = \bmat{1&0&0\\0&0&1\\0&1&0} \quad & E_1^{-1} = \bmat{1&0&0\\0&0&1\\0&1&0} &
+	\end{align*}
+	\item[Type 2]
+	\begin{align*}
+		& \rowop_2 = dR_3 \rightarrow R_3 & E_2 = \bmat{1&0&0\\0&1&0\\0&0&d} \quad & E_2^{-1} = \bmat{1&0&0\\0&1&0\\0&0&\frac{1}{d}} &
+	\end{align*}
+	\item[Type 3]
+	\begin{align*}
+		& \rowop_3 = R_2 + dR_3 \rightarrow R_2 & E_3 = \bmat{1&0&0\\0&1&d\\0&0&1}  \quad & E_3^{-1} = \bmat{1&0&0\\0&1&-d\\0&0&1} &
+	\end{align*}
+\end{itemize}
 \begin{theorem}
 	Let $A$ and $B$ be $m \times n$ matrices. The matrix $A$ is row equivalent to $B$ if and only if there are elementary matrices $E_1,E_2,...,E_k$ such that $B = E_kE_{k-1}\cdots E_2E_1A.$
 \end{theorem}
@@ -305,6 +320,49 @@ If $A$ is an $n \times n$ matrix, then
 		establishing the claim.
 	\end{proof}
 \end{theorem}
+
+\subsubsection{LU Factorization}
+To describe the process of obtaining a $LU$ factorization of an $m \times n$ matrix $A$, suppose that $A$ can be reduced to an upper triangular matrix by a sequence of row operations which correspond to lower triangular elementary matrices. That is, there exist lower triangular elementary matrices $L1, L2, ..., L_k$ such that
+\[ L_k,L_{k-1}\cdots L_1A = U \]
+Since each of the matrices $L_i$ with $1 \leq i \leq k$ is invertible, we have
+\[ A = L_1^{-1}L_2^{-1}\cdots L_k^{-1}U\]
+By Theorem \ref{inv-elementary}, $L_1^{-1}L_2^{-1}\cdots L_k^{-1}$ are elementary matrices. They are also lower triangular. Now let $L = L_1^{-1}L_2^{-1}\cdots L_k^{-1}$. Observe that $L$ is lower triangular as it is the product of lower triangular matrices. The desired factorization is thus given by $A=LU$.
+
+\subsubsection{Solving a Linear System Using $LU$ Factorization}
+Suppose $Ax=b$ where $A \letmatrix{m}{n}, x \letmatrix{n}{1}, b \letmatrix{m}{1}$.
+\begin{enumerate}[itemsep=0pt]
+	\item Factor $A = LU$\\
+	$\therefore$ realize our system as
+	\begin{align*}
+		(LU)x &= b\\
+		L(Ux) &= b
+	\end{align*}
+	\item Define $y = Ux$.
+	\item Solve $Ly = b$ for $y$ by forward substitution.
+	\item Solve $Ux = y$ for $x$ by back substitution.
+\end{enumerate}
+\textbf{Example:}
+\begin{align*}
+	\bmat{1&0&0\\2&1&0\\3&4&1}\bmat{y_1\\y_2\\y_3} &= \bmat{b_1\\b_2\\b_3}\\
+	\bmat{y_1\\2y_1+y_2\\3y_1+4y_2+y_3} &= \bmat{b_1\\b_2\\b_3}
+\end{align*}
+\begin{align*}
+	y_1 = b_1\\
+	2y_1 + y_2 = b_2 \implies y_2 = b_2 - 2y_1 = b_2 - 2b_1\\
+	3y_1+4y_2+y_3 = b_3 \implies y_3 = b_3 - 3y_1-4y_2 = b_3 - 3b_1 - 4(b_2 - 2b_1) = b_3 - 4b_2 + 5b_1
+\end{align*} 
+\begin{align*}
+	\bmat{1&-1&2\\0&2&1\\0&0&1}\bmat{x_1\\x_2\\x_3} &= \bmat{c_1\\c_2\\c_3}
+\end{align*}
+\begin{align*}
+	x_1 - x_2 + 2x_3 &= c_1\\
+	2x_2 + x_3 &= c_2\\
+	x_3 &= c_3\\
+	&\vdots
+\end{align*}
+\begin{note}
+	If row interchanges are requires to reduce a matrix $A$, a factorization is still possible. In this case the matrix $A$ can be factored as $A = PLU$, where $P$ is a \textnormal{permutation matrix}, that is, a matrix that results from interchanging rows of the elementary matrix. 
+\end{note}
 \end{document}
 
 
