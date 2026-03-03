@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+%\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath, amssymb, empheq, mathtools, bbold, enumitem, hyperref, physics}
+\usepackage{amsthm}
+\usepackage[framemethod=TikZ]{mdframed}
+%\usepackage{framed}
+%\usepackage[amsthm,framed,thmmarks]{ntheorem}
+
+\renewcommand{\bf}[1]{\textbf{#1}}
+\renewcommand{\v}[1]{\boldsymbol{#1}}
+
+%\newframedtheorem{frm-thm}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{fact}{Fact}
+\newtheorem*{note}{Note}
+\newtheorem{definition}{Definition}
+
+\surroundwithmdframed[]{theorem}
+\newenvironment{frmthm}{
+	\begin{mdframed}
+		\begin{theorem}
+		}{		
+		\end{theorem}
+	\end{mdframed}
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\matadd}{+_{\text{mat}}}
+\newcommand{\matdot}{\cdot_{\text{mat}}}
+
+\newcommand{\mxn}{m \times n}
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+\newcommand{\rowop}{\mathcal{R}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
+% Ch. 2: Linear Combinations and Linear Independence
+
+\begin{document}
+\setcounter{section}{-1}
+\section{Preface}
+\section[Vectors in R^n]{Vectors in $R^n$}
+\begin{definition}[Vectors in $\reals^n$]
+	Euclidean $n$-space, denoted by $\reals^n$, or simply $n$-space, is defined by
+	\[ \reals^n = \left\{ \bmat{x_1\\x_2\\\cdots\\x_n} \vrule \; x_i \in \reals, \text{for} i = 1, 2, ..., n \right\} \]
+	The entries of a vector are called the \textbf{components} of the vector.
+\end{definition}
+The vector $v = \left[\begin{smallmatrix} 1\\2 \end{smallmatrix}\right]$ is the directed line segment from the origin $(0, 0)$ to the point $(1, 2)$. The point $(0, 0)$ is the \textbf{initial point} and the point $(1,2)$ is the \textbf{terminal point}. The length of the vector is the length of the line segment from the initial point to the terminal point. For example, the length of $v = \bmat{1\\2}$ is $\sqrt{1^2 + 2^2} = \sqrt{5}$. A vector is unchanged if it is relocated elsewhere in the plane, provided that the length and direction remain unchanged. When the initial point of a vector is the origin, we say that the vector is in \textbf{standard position}.\par
+Since vectors are matrices, two vectors are \textbf{equal} provided that their corresponding components are equal. The operations of addition and scalar multiplication are defined componentwise as they are for matrices.
+\begin{definition}[Addition and Scalar Multiplication of Vectors]
+	Let \bf{u} and \bf{v} be vectors in $\reals^n$ and $c$ a scalar.
+	\begin{enumerate}[itemsep=0pt]
+		\item The \bf{sum} of \bf{u} and \bf{v} is
+		\[ \text{\bf{u} $+$ \bf{v}} = \bmat{u_1\\u_2\\ \cdots \\ u_n} + \bmat{v_1\\v_2\\ \cdots \\ v_n} = \bmat{u_1 + v_1\\u_2 + v_2 \\ \cdots \\ u_n + v_n} \]
+		\item The \bf{scalar product} of $c$ and \bf{u} is
+		\[ \text{$c$\bf{u}} = c\bmat{u_1\\u_2\\\cdots\\u_n} = \bmat{cu_1\\cu_2\\\cdots\\cu_n} \]
+	\end{enumerate}
+\end{definition}
+\section{Linear Combinations}
+\begin{definition}[Linear Combination]
+	Let $S = \{ \vb{v}_1, \vb{v}_2, \dots, \vb{v}_k \}$ be a set of vectors in $\reals^n$, and let $c_1, c_2, \dots, c_k$ be scalars. An expression of the form
+	\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots + c_k\vb{v}_k = \sum_{i=1}^{k}c_i\vb{v}_i \]
+	is called a \bf{linear combination} of the vectors of $S$. Any vector \bf{v} that can be written in this form is also called a linear combination of the vectors of $S$.
+\end{definition}
+
+
+\end{document}

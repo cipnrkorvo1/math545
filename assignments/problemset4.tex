@@ -1,7 +1,7 @@
 \documentclass[]{article}
 \usepackage{amsmath, amssymb, amsthm}
 
-\usepackage{multicol, enumitem}
+\usepackage{multicol, enumitem, physics}
 
 \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 
@@ -152,4 +152,19 @@
 	Therefore the solution of this linear system is $\boxed{(1, 2, 2)}$.
 	
 \section{}
+The vector $\vb{v}$ is a linear combination of the vectors $\vb{v}_1, \vb{v}_2, \text{ and } \vb{v}_3$ if there are scalars $c_1, c_2, \text{ and } c_3$ such that
+\[
+	c_1\bmat{2\\-2\\0} + c_2\bmat{3\\0\\-3} + c_3\bmat{-2\\0\\-1} = \bmat{2\\8\\2}\\
+\]
+This equation is represented by this augmented matrix
+\[ \begin{augmx}{3} 2&3&-2&2\\-2&0&0&8\\0&-3&-1&2 \end{augmx} \]
+Reducing the augmented matrix
+\[
+\begin{array}{ccc}
+	\begin{augmx}{3} 2&3&-2&2\\-2&0&0&8\\0&-3&-1&2 \end{augmx} & \qquad \text{to} \qquad & \begin{augmx}{3} -2&0&0&8\\0&-3&0&14\\0&0&-1&12 \end{augmx}
+\end{array}
+\]
+shows that the linear system is consistent. This is further supported by finding that the determinant of the coefficient matrix is $-6$; a non-zero determinant implies there is a unique solution to the corresponding system of equations, so there must be values $c_1, c_2, c_3$ which satisfy the original equation.\par
+\underline{Thus, $\vb{v}$ must be a linear combination of $\vb{v}_1, \vb{v}_2, \text{ and } \vb{v}_3$.}
+
 \end{document}
