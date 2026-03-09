@@ -11,6 +11,7 @@
 \renewcommand{\v}[1]{\boldsymbol{#1}}
 
 %\newframedtheorem{frm-thm}{Theorem}
+\theoremstyle{definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem*{fact}{Fact}
 \newtheorem*{note}{Note}
@@ -71,6 +72,110 @@ Since vectors are matrices, two vectors are \textbf{equal} provided that their c
 	\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots + c_k\vb{v}_k = \sum_{i=1}^{k}c_i\vb{v}_i \]
 	is called a \bf{linear combination} of the vectors of $S$. Any vector \bf{v} that can be written in this form is also called a linear combination of the vectors of $S$.
 \end{definition}
+\subsection{Vector Form of a Linear System}
+We can use the column vectors of the coefficient matrix $A \in \letmatrix{m}{n}$ to write in the equivalent form
+\[ x_1\bmat{a_{11}\\a_{21}\\\vdots\\a_{m1}} + x_2\bmat{a_{12}\\a_{22}\\\vdots\\a_{m2}} + \cdots + x_n\bmat{a_{1n}\\a_{2n}\\\vdots\\a_{mn}} = \bmat{b_1\\b_2\\\vdots\\b_m}\]
+This last equation is called the \bf{vector form} of a linear system. This equation can also be written as
+\[ x_1\vb{A}_1 + x_2\vb{A}_2 + \cdots + x_n\vb{A}_n = \vb{b} \]
+where $\vb{A}_i$ denotes the $i$th column vector fo the matrix $A$. Observe that this equation is consistent whenever the vector $b$ can be written as a linear combination of the column vectors of $A$.
+\begin{theorem}
+	The linear system $A\vb{x = b}$ is consistent $\iff$ the vector $\vb{b}$ can be expressed as a linear combination of the column vectors of $A$. 
+\end{theorem}
+\section{Linear Independence}
+\begin{definition}[Linearly Independent and Linearly Dependent]
+	The set of vectors $S = \{\vb{v_1, v_2, ..., v_m}\}$ in $\reals^n$ is \bf{linearly independent} provided that the only solution to the equation
+	\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots + c_m\vb{v}_m = 0 \]
+	is the trivial solution $c_1 = c_2 = ... = c_m = 0$. If the above linear combination has a nontrivial solution, then the set $S$ is called \bf{linearly dependent}.
+\end{definition}
+For example, the set of vectors
+\[ S = \{ \vb{e}_1, ..., \vb{e}_n \} \]
+in $\reals^n$ is linearly independent.
+\begin{theorem}
+	Let $S = \{ \vb{v}_1, \vb{v}_2, ..., \vb{v}_n \}$ be a set of $n$ vectors in $\reals^m$. If $n > m$, then the set $S$ is linearly dependent.
+	\begin{proof}
+		Let $A$ be the $m \times n$ matrix with column vectors the vectors of $S$ so that
+		\[ \vb{A}_i = \vb{v}_i \qquad \text{for} \qquad i = 1, 2, ..., n \]
+		In this way we have
+		\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots | c_n\vb{v}_n = 0 \]
+		in matrix form, is the homogeneous linear system
+		\[ A\vb{c} = 0 \qquad \text{where} \qquad \vb{c} = \bmat{c_1\\c_2\\\vdots\\c_n} \]
+		As $A$ is not square with $n > m$, there is at least one free variable. Thus the solution is not unique and $S = \{ \vb{v}_1, ..., \vb{v}_n \}$ is linearly dependent.
+	\end{proof}
+\end{theorem}
+\begin{theorem}
+	If a set of vectors $S = \{ \vb{v}_1, \vb{v}_2, ..., \vb{v}_n \}$ contains the zero vector, then $S$ is linearly dependent.
+	\begin{proof}
+		Suppose that the vector $\vb{v}_k =\vb{0}$, for some index $k$, with $1 \leq k \leq n$. Setting $c_1 = c_2 = \cdots = c_{k-1} = c_k = 1$, and $c_{k+1} = c_{k+2} + \cdots + c_n = 0$, we have
+		\[ 0\vb{v}_1 + \cdots + 0\vb{v}_{k-1} + 1\vb{v}_k + 0\vb{v}_{k+1} + \cdots + 0\vb{v}_n = \vb{0} \]
+		which shows that the set of vectors is linearly dependent.
+	\end{proof}
+\end{theorem}
+\begin{theorem}
+	\label{lindep_lincomb}
+	A set of nonzero vectors is linearly dependent $\iff$ at least one of the vectors is a linear combination of the other vectors in the set.
+	\begin{proof}
+		Let $S = \{ \vb{v}_1, \vb{v}_2, ..., \vb{v}_n \}$ be a set of nonzero vectors that is linearly dependent. Then there are all scalars $c_1, c_2, ..., c_n$, not all 0, with
+		\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots + c_n\vb{v}_n = \vb{0} \]
+		Suppose that $c_k \neq 0$ for some index $k$. Then solving the previous equation for the vector $\vb{v}_k$, we have
+		\[ \vb{v}_k = -\frac{c_1}{c_k}\vb{v}_1 - \cdots - \frac{c_{k-1}}{c_k}\vb{v}_{k-1} - \frac{c_{k+1}}{c_k}\vb{v}_{k+1} - \cdots - \frac{c_n}{c_k}\vb{v}_n \]
+		\indent Conversely, let $\vb{v}_k$ be such that
+		\[ \vb{v}_k = c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots c_{k-1}\vb{v}_{k-1} + c_{k+1}\vb{v}_{k+1} + \cdots + c_n\vb{v}_n \]
+		Then
+		\[ c_1\vb{v}_1 + c_2\vb{v}_2 + \cdots c_{k-1}\vb{v}_{k-1} - \vb{v}_k + c_{k+1}\vb{v}_{k+1} + \cdots + c_n\vb{v}_n = \vb{0}\]
+		Since the coefficient of $\vb{v}_k$ is $-1$, the linear system has a nontrivial solution. Hence, the set $S$ is linearly dependent.
+	\end{proof}
+\end{theorem}
+\indent As an illustration, let $S$ be the set of vectors
+\[ S = \left\{ \bmat{1\\3\\1}\bmat{-1\\2\\1} \bmat{2\\6\\2} \right\} \]
+Notice that the third vector is twice the first vector. Thus, by Theorem \ref{lindep_lincomb}, the set $S$ is linearly dependent.
 
+\begin{theorem}
+	$\;$
+	\begin{enumerate}[itemsep=0pt,parsep=0.5pt]
+		\item[$\vb{1.}$] If a set of vectors $S$ is linearly independent, then any subset of $S$ is also a linearly independent set of vectors.
+		\item[$\vb{2.}$] If a set of vectors $T$ is linearly dependent and $S$ is a set of vectors that contains $T$, then $S$ is also a linearly dependent set of vectors.
+	\end{enumerate}
+	%\begin{proof}    \end{proof}
+\end{theorem}
+
+\begin{fact}
+	Let $S \subseteq \reals^n$. Then S will be \underline{linearly dependent} in $\reals^n$ if $S$ contains a finite linear dependent subset.\\
+	We say $S$ is linearly independent if every finite subset of $S$ is linearly independent.
+\end{fact}
+
+\begin{theorem}
+	\label{lindep_unique}
+	Let $S = \{ \vb{v}_1, \vb{v}_2, ..., \vb{v}_n \}$ be a linearly independent subset. Suppose that there are scalars $c_1, c_2, ..., c_n$ such that
+	\[ \vb{v} = \sum_{k=1}^{n}c_k\vb{v}_k \]
+	Then the scalars are unique.
+	\begin{proof}
+		To prove the result, let $\vb{v}$ be written as
+		\[ \vb{v} = \sum_{k=1}^{n}c_k\vb{v}_k \qquad \text{and as} \qquad \vb{v} = \sum_{k=1}^{n}d_k\vb{v}_k \]
+		Then
+		\begin{align}
+			\vb{0} = \vb{v} - \vb{v} &= \sum_{k=1}^nc_k\vb{v}_k - \sum_{k=1}^nd_k\vb{v}_k\\
+			&= \sum_{k=1}^{n}(c_k - d_k)\vb{v}_k
+		\end{align}
+		Since the set of vectors $S$ is linearly independent, the only solution to this last equation is the trivial one. That is,
+		\[ c_1 - d_1 = 0, c_2 - d_2 = 0, ..., c_n - d_n = 0, \quad \text{ or } \quad c_1 = d_1, c_2 = d_2, ..., c_n = d_n \]
+	\end{proof}
+\end{theorem}
+
+\subsection{Linear Systems}
+\begin{theorem}
+	Let $A\vb{x} = \vb{b}$ be a consistent $m \times n$ linear system. The solution is unique $\iff$ the column vectors of $A$ are linearly dependent.
+	\begin{proof}
+		First we prove that the condition is necessary. Suppose the column vectors $\vb{A}_1, \vb{A}_2, ..., \vb{A}_n$ are linearly independent, and let
+		\[ \vb{c} = \bmat{c_1\\c_2\\\vdots\\c_n} \quad \text{ and } \quad \vb{d} = \bmat{d_1\\d_2\\\vdots\\d_n} \]
+		be solutions to the linear system. In vector form, we have
+		\[ c_1\vb{A}_1 + c_2\vb{A}_2 + \cdots + c_n\vb{A}_n = \vb{b} \quad \text{ and } \quad d_1\vb{A}_1 + d_2\vb{A}_2 + \cdots + d_n\vb{A}_n = \vb{b} \]
+		By Theorem \ref{lindep_unique}, $c_i = d_i, \forall i$. Hence $\vb{c} = \vb{d}$ and the solution to the linear system is unique.\par
+		To prove the sufficiency, we will prove the contrapositive statement. Let $\vb{v}$ be a solution to the linear system $A\vb{x} = \vb{b}$, and assume that the column vectors of $A$ are linearly dependent. Then there are scalars $c_1, c_2, ..., c_n$, not all 0, such that
+		\[ c_1\vb{A}_1 + c_2\vb{A}_2 + \cdots + c_n\vb{A}_n = \vb{0} \]
+		that is, if $\vb{c} = \bmat{c_1\\c_2\\\vdots\\c_n}$, then $A\vb{c} = \vb{0}$. Since matrix multiplication satisfies the distributive property,
+		\[ A(\vb{v} + \vb{c}) = A\vb{v} + A\vb{c} = \vb{b} + 0 = \vb{b} \]
+		Therefore, the vector $\vb{v} + \vb{c}$ is another solution to the linear system, and the solution is not unique. This completes the proof of the contrapositive statement. Therefore, we have shown that if the solution is unique, then the column vectors of $A$ are linearly independent.
+	\end{proof}
+\end{theorem}
 
 \end{document}
