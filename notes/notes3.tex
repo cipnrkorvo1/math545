@@ -15,6 +15,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem*{fact}{Fact}
 \newtheorem*{note}{Note}
+\newtheorem*{remark}{Remark}
 \newtheorem{definition}{Definition}
 
 \surroundwithmdframed[]{theorem}
@@ -25,6 +26,12 @@
 		\end{theorem}
 	\end{mdframed}
 }
+
+\newenvironment{factsummary}{
+	{\large\textbf{Fact Summary}}\\
+	}{
+}
+\surroundwithmdframed{factsummary}
 
 \newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
 \newcommand{\reals}{\mathbb{R}}
@@ -37,6 +44,8 @@
 \newcommand{\mxn}{m \times n}
 \newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
 \newcommand{\rowop}{\mathcal{R}}
+%\newcommand{\span}[1]{\text{span(}#1\text{)}}
+
 
 \newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
 \newcommand{\detmat}[1]{
@@ -52,19 +61,52 @@
 \begin{document}
 \section{Definition of a Vector Space}
 	\begin{definition}[Vector Space]
-		A set $V$ is called a \bf{vector space} over the real numbers provided that there are two operations---addition, denoted by $\oplus$, and scalar multiplication, denoted by $\odot$---that satisfy all the following axioms. The axioms must hold for all vectors $\vb{u}, \vb{v}, and \vb{w}$ in $V$ and all scalars $c$ and $d$ in $\reals$.
+		A set $V$ is a \underline{vector space over $\reals$} if there is an operation "$\oplus$" combining $\alpha, \beta \in V$ into $\alpha \oplus \beta \in V$, and an operation "$\odot$" combining $c \in \reals$ and $\alpha \in V$ into $c \odot \alpha \in V$, which furthermore satisfy the following axioms for all $\alpha, \beta, \delta \in V$ and $c,d \in \reals$:
 		
 		\begin{enumerate}[font=\bfseries, itemsep=0pt]
-			\item The sum $\vb{u}\vp\vb{v}$ is in $V$. \hfill Closed under addition
-			\item $\vb{u}\vp\vb{v} = \vb{v}\oplus\vb{u}$ \hfill Addition is commutative
-			\item $(\vb{u} \oplus \vb{v}) \oplus \vb{w} = \vb{u} \oplus (\vb{v} \oplus \vb{w})$ \hfill Addition is associative
-			\item There exists a vector $\vb{0} \in V$ such that for every vector $\vb{u} \in V, \vb{0} \odot \vb{u} = \vb{u} \odot \vb{0} = \vb{u}$. \hfill Additive identity
-			\item For every vector $\vb{u} \in V$, there exists a vector, denoted by $-\vb{u}$, such that $\vb{u} \oplus (-\vb{u}) = -\vb{u} \odot \vb{u} = \vb{0}$. \hfill Additive inverse
-			\item The scalar product $c \odot \vb{u}$ is in $V$. \hfill Closed under scalar multiplication
-			\item $c \odot (\vb{u} \oplus vb{v}) = (c \odot \vb{u}) \oplus (c \odot \vb{v})$
-			\item $(c + d) \odot \vb{u} = (c \odot \vb{u}) \oplus (d \odot \vb{u})$
-			\item $c \odot (d \odot \vb{u}) = (cd)\odot \vb{u}$
-			\item $1 \odot \vb{u} = \vb{u}$
+			\item The sum $\alpha \oplus \beta$ is in $V$. \hfill Closed under addition
+			\item $\alpha \oplus \beta = \beta \oplus \alpha$ \hfill Addition is commutative
+			\item $(\alpha \oplus \beta) \oplus \delta = \alpha \oplus (\beta \oplus \delta)$ \hfill Addition is associative
+			\item There exists a vector $\vb{0}_v \in V$ s.t. for every vector $\alpha \in V, \vb{0}_v \oplus \alpha = \alpha$. \hfill Additive identity
+			\item For every vector $\alpha \in V$, there exists a vector, denoted by $\delta$, such that $\alpha \oplus \delta = \vb{0}_v$. \hfill Additive inverse
+			\item The scalar product $c \odot \alpha$ is in $V$. \hfill Closed under scalar multiplication
+			\item $c \odot (\alpha \oplus \beta) = (c \odot \alpha) \oplus (c \odot \beta)$
+			\item $(c + d) \odot \alpha = (c \odot \alpha) \oplus (d \odot \alpha)$
+			\item $c \odot (d \odot \alpha) = (cd)\odot \alpha$
+			\item $1 \odot \alpha = \alpha$
+		\end{enumerate}
+	\end{definition}
+
+	\begin{remark}
+		$\text{dim}(V) = n \implies V \cong \reals^n$
+	\end{remark}
+
+	\begin{factsummary}
+		\begin{enumerate}[font=\bfseries,itemsep=0pt]
+			\item To determine whether a set $V$ with addition and scalar multiplication defined on $V$ is a vector space requires verification of the 10 vector space axioms.
+			\item The Euclidean space $\reals^n$ and the set of matrices $M_{m\times n}$, with the standard componentwise operations, are vector spaces. The set of polynomials of degree $n$ or less, including the zero polynomial, with termwise operations is a vector space.
+			\item In all vector spaces, additive inverses are unique. Also
+			\[ 0 \odot \alpha = \vb{0}_v \qquad c \cdot \vb{0}_v = \vb{0}_v \qquad \text{and} \qquad (-1)\odot \alpha = -\alpha \]
+			In addition if $c \odot \vb{u} = \vb{0}$, then either the scalar $c$ is the number 0 or the vector $\vb{u}$ is the zero vector.
+		\end{enumerate}
+	\end{factsummary}
+\section{Subspaces}
+	\begin{definition}[Subspace]
+			A \textbf{subspace} $W$ of a vector space $V$ is a nonempty subset that is itself a vector space with respect to the inherited operations of vector addition and scalar multiplication on $V$.
+	\end{definition}
+	\subsection{Span of a Set of Vectors}
+	\begin{definition}[Span of a Set of Vectors]
+		Let $V$ be a vector space and let $S = \{\alpha_1, \alpha_2, ..., \alpha_k\}$
+		be a set of vectors in $V$. The \textbf{span} of $S$, denoted by $\text{span}(S)$, is the set
+		\[ \text{span}(S)= \{ c_1\alpha_1 = c_2\alpha_2 + \cdots + c_n\alpha_n | c_1, c_2, ..., c_n \in \reals \} \]
+		$S$ is a \emph{spanning set for $V$} if span($S$) = $V$.
+	\end{definition}
+\section{Basis and Definition}
+	\begin{definition}[Basis for a Vector Space]
+		A subset $B$ of a vector space $V$ is a \textbf{basis} for $V$ provided that
+		\begin{enumerate}[font=\bfseries,itemsep=0pt]
+			\item $B$ is a linearly independent set of vectors in $V$
+			\item span($B$) = $V$
 		\end{enumerate}
 	\end{definition}
 \end{document}
