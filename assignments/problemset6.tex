@@ -1,0 +1,101 @@
+\documentclass[]{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+\usepackage{multicol, enumitem, physics, changepage}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\mrow}[3]{\left[
+	\begin{array}{ccc}
+		#1 & #2 & #3
+	\end{array}
+	\right]}
+\newcommand{\mcol}[3]{\left[
+	\begin{array}{c}
+		#1\\
+		#2\\
+		#3
+	\end{array}
+	\right]}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\extaugmx}[2]{
+	\left[\begin{matrix}
+		#1
+	\end{matrix}\right|\left.\begin{matrix}
+		#2
+	\end{matrix}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
+
+\begin{document}
+	\begin{center}
+		{\Large\textbf{MATH545: Problem Set 6}}\\
+		\large Grey Cole\\
+		March 27, 2026
+	\end{center}
+\section{}
+Since the matrix contains 4 rows and only 3 columns, the solution set to $A\vb{x}=\vb{0}$ must contain one free variable, which means the basis of the nullspace contains one vector.\\
+To find the basis of the nullspace of $A$, we can first determine the solution set for $A\vb{x}=\vb{0}$ using row reduction.
+\[ \begin{augmx}{4}3&3&1&3&0\\-1&0&-1&-1&0\\2&0&2&1&0\end{augmx} \longrightarrow \begin{augmx}{4}1&0&1&0&0\\0&1&-\frac{2}{3}&0&0\\0&0&0&1&0\end{augmx}\]
+With $A$ in RREF, a simple system of linear equations defines the solution set:
+\begin{align*}
+		x_1 + x_3 &= 0 \quad \rightarrow \quad x_1 = -x_3\\
+		x_2 - \frac{2}{3}x_3 &= 0 \quad \rightarrow \quad x_2 = \frac{2}{3}x_3\\
+		x_4 &= 0
+\end{align*}
+Defining $x_3$ as a free variable $t$, we can deduce that the solution set $S$ is
+\[ S = \left\{ (-t, \frac{2}{3}t, t, 0) \;\;|\;\; t \in \reals \right\} \]
+Expressing this set as a vector instead, we can then derive a basis of the nullspace of $A$ from it:
+\[ \bmat{-t\\\frac{2}{3}t\\t\\0} = t\bmat{-1\\\frac{2}{3}\\1\\0} \quad \longrightarrow \quad \boxed{\text{basis } N(A) = \left\{\bmat{-1\\\frac{2}{3}\\1\\0}\right\}} \]
+
+\section{}
+\subsection{}
+To prove that $B = \left\{ x^2+2x+2,2x+3,-x^2+x+1 \right\}$ is a basis for $V = \mathcal{P}_2$, we must show $span(B) = V$ and that $B$ is linearly independent. First, to prove $span(B) = \mathcal{P}_2$, we must find the unique solutions $c_1,c_2,c_3$ to 
+\[ c_1(x^2+2x+2) + c_2(2x+3) + c_3(-x^2+x+1) = ax^2 + bx + c \]
+By distributing and collecting like terms, we have
+\[ (c_1-c_3)x^2 + (2c_1 + 2c_2 + c_3)x + (2c_1 + 3c_2 + c_3) = ax^2 + bx + c \]
+therefore
+\[ a = c_1 - c_3 \qquad b = 2c_1 + 2c_2 + c_3 \qquad c = 2c_1 + 3c_2 + c_3 \]
+To show $span(B) = \mathcal{P}_2$, this system must be consistent for all values of $a, b, c \in \reals$. To prove that it is, we reduce the coefficient matrix of the system and show that there is one unique solution $c_1,c_2,c_3$ for any $a, b, c$.
+
+\[ \begin{augmx}{3}1&0&-1&a\\2&2&1&b\\2&3&1&c\end{augmx} \quad \longrightarrow \quad \begin{augmx}{3}1&0&0&\frac{a}{3} + b - \frac{2c}{3}\\0&1&0&-b+c\\0&0&1&-\frac{2a}{3}+b-\frac{2c}{3}\end{augmx} \]
+\begin{align*}
+	c_1 &= \frac{1}{3}a + b - \frac{2}{3}c\\
+	c_2 &= -b + c\\
+	c_3 &= -\frac{2}{3}a + b - \frac{2}{3}c
+\end{align*}
+And so we have found the unique solution given some $a,b,c$, which proves $span(B) = V$. We know this solution is unique because the number of equations equals the number of unknowns. To prove linear independence, we can consider the unique solutions for $c_1,c_2,c_3$ and observe that when $a=b=c=0$, corresponding to the vector $\vb{0}$ in $\mathcal{P}_2$, $c_1=c_2=c_3=0$. Because the solution is unique, there cannot be a solution other than the trivial solution, and thus $B$ is also linearly independent.
+\subsection{}
+We can use the solution found in $2.a$ to find $[\vb{v}]_B$ for $\vb{v} = -3x^2 + 6x + 8$. $\vb{v}$ gives us the values $(a=-3,b=6,c=8)$ needed to change its basis to $B$. Plugging these values in, we get
+\begin{align*}
+	c_1 &= \frac{1}{3}(-3) + 6 - \frac{2}{3}(8)&& -1 + 6 - \frac{16}{3} = -\frac{1}{3}\\
+	c_2 &= -6 + 8&\hspace{-4em} \longrightarrow \qquad& 2\\
+	c_3 &= -\frac{2}{3}(-3) + 6 - \frac{2}{3}(8)&&2 + 6 - \frac{16}{3} = \frac{8}{3}
+\end{align*}
+\[ \text{thus} \qquad \boxed{[\vb{v}]_B = \bmat{-\frac{1}{3}\\2\\\frac{8}{3}}}\]
+\section{}
+\begin{multline*} [\vb{v}]_B = a\vb{v}_1 + b\vb{v}_2 + c\vb{v}_3 + d\vb{v}_4 = a\bmat{1\\0\\1\\0} + b\bmat{0\\-1\\1\\-1} + c\bmat{0\\-1\\-1\\0} + d\bmat{-1\\0\\0\\-1}\\
+	= \bmat{a\\0\\a\\0}+\bmat{0\\-b\\b\\-b}+\bmat{0\\-c\\-c\\0}+\bmat{-d\\0\\0\\-d} = \boxed{\bmat{a-d\\-b-c\\a+b-c\\-b-d} = [\vb{v}]_B}
+\end{multline*}
+
+\end{document}
