@@ -59,5 +59,55 @@
 % Ch. 4 Linear Transformations
 
 \begin{document}
-	
+	\section{Linear Transformations}
+	For $V, W$ which are real vector spaces, $L:V\rightarrow W$ is a \emph{linear transformation} if
+	\begin{enumerate}[font=\sffamily\bfseries]
+		\item $\forall v_1, v_2 \in V\\ L(v_1 + v_2) = L(v_1) + L(v_2)$
+		\item $\forall v \in V, \forall c \in \reals\\ L(c\times v) = c \times L(v)$
+	\end{enumerate}
+	\subsection{Facts:}
+	Let $L:V \rightarrow W$ be linear.
+	\begin{enumerate}[font=\sffamily\bfseries]
+		\item $L(0_V) = 0_W$
+		\item $L(-v) = -L(v), \forall v \in V$
+		\item For every vector subspace $V_0 of V$, $L(V_0)$ is a vector subspace of $W$.
+		\begin{proof}
+			Recall $L(V) = \{L(v) | v \in V\} \subseteq W$.\\
+			Since $L(0_V) = 0_W, L(V) \neq \emptyset$. Therefore, it suffices to show that $L(V)$ is closed under vector addition and under scalar multiplication.\\\\
+			Let $w_1, w_2 \in L(V)$.\\
+			So, $w_1 = L(v_1)$ and $w_2 = L(v_2)$ for some $v_1, v_2 \in V$.
+			Now $w_1 + w_2 = L(v_1) + L(v_2) = L(v_1 + v_2)$.
+			Since $v_1 + v_2 \in V$, then $w_1 + w_2 \in L(V)$.\\
+			For $c \in \reals$,\\
+			$c \times w_1 = c \times L(v_1) = L(c \times v_1).\\
+			\therefore c \times w_1 \in L(V).$
+		\end{proof} 
+	\end{enumerate}
+	\subsection{Misc. Theorems}
+	\begin{theorem}
+		Let $V$ be a f-dim v.space and $W$ a v.subspace of $V$. Then $\dim(W) \leq \dim(V)$ and $\dim(W) = \dim(V) \iff W = V$.
+		\begin{proof}
+			Let $\phi = \{w_1, w_2, ..., w_d\}$ be a basis for $W$. So $\phi$ is a \emph{linearly independent} subset of $V$.\\
+			Then there exists a basis of $V$ of the form $\{w_1,...,w_d; u_d,...,u_n\}$, when $n \geq d$.\\
+			Since $\dim(W) = d$ and $\dim{V} = n$, then $d \leq n \implies \dim(W) \leq \dim(V)$.\\
+			Furthermore $\dim(W) = \dim(V) \implies \phi$ is in fact a basis for $V$. In this case $W = V$.
+		\end{proof}
+	\end{theorem}
+	\begin{theorem}
+		Let $L, T:V \rightarrow W$ lin trans. Then the function $L+T:V \rightarrow W$ is also a linear transformation.
+		\begin{proof} Show that $L+T$ satisfies both properties of a linear transformation.
+			\begin{align*}
+				(1) \quad (L+T)(v_1 + v_2) &= L(v_1 + v_2) + T(v_1 + v_2)\\
+				&= L(v_1) + L(v_2) + T(v_1) + T(v_2)\\
+				&= L(v_1) + T(v_1) + L(v_2) + T(v_2)\\
+				&= (L+T)(v_1) + (L+T)(v_2)
+			\end{align*}
+			\begin{align*}
+				(2) \quad c(L+T)(v) &= c(L(v) + T(v))\\
+				&= c\cdot L(v) + c\cdot T(v)\\
+				&= L(c \cdot v) + T(c \cdot v)\\
+				&= (L+T)(c \cdot v)
+			\end{align*}
+		\end{proof}
+	\end{theorem}
 \end{document}
