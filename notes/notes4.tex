@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\usepackage{graphicx, float} % Required for inserting images
 %\usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{amsmath, amssymb, empheq, mathtools, bbold, enumitem, hyperref, physics}
 \usepackage{amsthm}
@@ -70,7 +70,7 @@
 	\begin{enumerate}[font=\sffamily\bfseries]
 		\item $L(0_V) = 0_W$
 		\item $L(-v) = -L(v), \forall v \in V$
-		\item For every vector subspace $V_0 of V$, $L(V_0)$ is a vector subspace of $W$.
+		\item For every vector subspace $V_0$ of $V$, $L(V)$ is a vector subspace of $W$.
 		\begin{proof}
 			Recall $L(V) = \{L(v) | v \in V\} \subseteq W$.\\
 			Since $L(0_V) = 0_W, L(V) \neq \emptyset$. Therefore, it suffices to show that $L(V)$ is closed under vector addition and under scalar multiplication.\\\\
@@ -110,4 +110,102 @@
 			\end{align*}
 		\end{proof}
 	\end{theorem}
+\section{The Null Space/Range}
+Let $V$ and $W$ be vector spaces. For a linear transformation $L: V \rightarrow W$ the \textbf{null space} of $L$ is defined by
+\[ N(L) = \{ \vec{v} \in V \; | \; L(\vec{v}) = \bf{0} \} \]
+and the \textbf{range} of $L$ is defined by
+\[ R(L) = \{ L(\vec{v}) \; | \; \vec{v} \in V) \} \]
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{screenshot001}
+	\caption{Visual projections of \emph{null space} and \emph{range}}
+	\label{Figure 1}
+\end{figure}
+
+Let $A$ be an $m \times n$ matrix and let $T: \reals^n \rightarrow \reals^n$ be the linear transformation defined by
+\[ T(v) = Av\]
+This last equation can be written in vector form as
+\[ T(v) = v_1A_1 + v_2A_2 + \cdots + v_nA_n \]
+where $A_i$ are the column vectors of $A$, and $v_i$ are the components of $v$ for $1 \leq i \leq n$. Thus
+\[ R(T) = \bf{col}(T) \]
+The dimension of the column space of $A$ is called the \textbf{column rank} of $A$. We also have
+\[ N(T) = \{ v \in \reals^n \; | \; Av = \bf{0} \} = N(A) \]
+The dimension of $N(A)$ is called the \bf{nullity} of $A$. Applying Theorem \ref{dimtheor}, we have
+\[ \bf{column rank}(A) + \bf{nullity}(A) = n \]
+In addition, the row space of $A$ denoted by $\bf{row}(A)$ is the span of the row vectors of $A$. It also holds that $\bf{row}(A) = \bf{col}(A^T)$.\\
+Using Theorem \ref{rowcoleq}, we can now define the \bf{rank} of a matrix $A$ as $\dim(\bf{row}(A))$ or $\dim(\bf{row}(A))$. Again by theorem $\ref{dimtheor}$, we have
+\[ \bf{rank}(A) + \bf{nullity}(A) = n\]
+\subsection{Facts}
+Let $V$ and $W$ be vector spaces and $L: V \rightarrow W$ a linear transformation.
+\begin{enumerate}[font=\sffamily\bfseries,itemsep=0pt]
+	\item The null space of $L$ is a subspace of $V$.
+	\item The range of $L$ is a subspace of $W$.
+\end{enumerate}
+\begin{theorem}
+	Let $V$ and $W$ be finite dimensional vector spaces and $B = \{ v_1, v_2, ..., v_n \}$ a basis for $V$. If $T: V \rightarrow W$ is a linear transformation, then
+	\[ R(T) = span\{ T(v_1), T(v_2), ..., T(v_n) \} \]
+	\begin{proof}
+		To show that the two sets are equal, we will show that each is a subset of the other. First, if $w$ is in $R(T)$, then there is a vector $v$ in $V$ such that $T(v) = w$. Now, since $B$ is a basis for $V$, there are scalars $c_1, c_2, ..., c_n$ with
+		\[ v = c_1v_1 + c_2v_2 + \cdots + c_nv_n \]
+		so that
+		\[ T(v) = T(c_1v_1 + c_2v_2 + \cdots + c_nv_n) \]
+		From the linearity of $T$, we have
+		\[ w = T(v) = c_1T(v_1) + c_2T(v_2) + \cdots + c_nT(v_n) \]
+		As $w$ is a linear combination of $T(v_1), T(v_2), ..., T(v_n)$, then \\$w \in span\{T(v_1), T(v_2), ..., T(v_n)\}$. Since this is true for all $w$ in $R(T)$, then
+		\[ R(T) \subset span\{T(v_1), T(v_2), ..., T(v_n)\} \]
+		\par On the other hand, suppose that $w \in span\{T(v_1), T(v_2), ..., T(v_n)\}$. Then there are scalars $c_1, ..., c_n$ with
+		\begin{align*}
+			w &= c_1T(v_1) + c_2T(v_2) + \cdots + c_nT(v_n)\\
+			&= T(c_1v_1 + c_2v_2 + \cdots + c_nv_n)
+		\end{align*}
+		Therefore, $w$ is the image under $T$ of $c_1v_1 + c_2v_2 + \cdots + c_nv_n$, which is an element of $V$. Therefore, $span\{T(v_1), T(v_2), ..., T(v_n)\} \subset R(T)$.
+	\end{proof}
+	
+\end{theorem}
+\begin{theorem}
+	\label{dimtheor}
+	Let $V$ and $W$ be finite dimensional vector spaces. If $T: V \rightarrow W$ is a linear transformation, then
+	\[ \dim(V) = \dim(R(T)) + \dim(N(T)) \]
+\end{theorem}
+\begin{theorem}
+	\label{rowcoleq}
+	The row rank and the column rank of a matrix $A$ are equal.
+\end{theorem}
+\begin{theorem}
+	\label{Aequivalencies}
+	Let $A$ be an $n \times n$ matrix. Then the following statements are equivalent.
+	\begin{enumerate}[font=\bfseries,itemsep=0pt]
+		\item $A$ is invertible.
+		\item The linear system $A\vec{x} = \vec{b}$ has a unique solution for every vector $\vec{b}$.
+		\item The homogeneous linear system $A\vec{x} = \bf{0}$ has the only trivial solution.
+		\item $A$ is row equivalent to the identity matrix.
+		\item $\det(A) \neq 0$
+		\item The column vectors of $A$ are linearly independent.
+		\item The column vectors of $A$ span $\reals^n$.
+		\item The column vectors of $A$ are a basis for $\reals^n$.
+		\item $\bf{rank}(A) = n$
+		\item $R(A) = \bf{col}(A) = \reals^n$
+		\item $N(A) = \{\bf{0}\}$
+		\item $\bf{row}(A) = \reals^n$
+		\item The number of pivot columns of the reduced row echelon form of $A$ is $n$.
+	\end{enumerate}
+	\vspace{0.25em}
+\end{theorem}
+
+\section{Isomorphisms}
+\begin{definition}[One-to-One and Onto]
+	Let $V$ and $W$ be vector spaces and $T: V \rightarrow W$ a mapping.
+	\begin{enumerate}[font=\bfseries,itemsep=0pt]
+		\item The mapping $T$ is called \bf{one-to-one} (or \bf{injective}) if $\vec{u} \neq \vec{v} \implies T(\vec{u}) \neq T(\vec{v})$. That is, distinct elements of $V$ must have distinct images in $W$.
+		\item The mapping $T$ is called \bf{onto} (or \bf{surjective}) if $T(V) = W$. That is, the range of $T$ is $W$.
+	\end{enumerate}
+	A mapping is called \bf{bijective} if it is both injective and surjective.
+\end{definition}
+
+\begin{definition}[Isomorphism]
+	Let $V$ and $W$ be vector spaces. A linear transformation $T: V \rightarrow W$ that is both one-to-one and onto is called an \bf{isomorphism}. In this case the vector spaces $V$ and $W$ are said to be \bf{isomorphic}.
+\end{definition}
+
+
 \end{document}

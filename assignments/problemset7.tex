@@ -1,0 +1,102 @@
+\documentclass[]{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+\usepackage{multicol, enumitem, physics, changepage}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\mrow}[3]{\left[
+	\begin{array}{ccc}
+		#1 & #2 & #3
+	\end{array}
+	\right]}
+\newcommand{\mcol}[3]{\left[
+	\begin{array}{c}
+		#1\\
+		#2\\
+		#3
+	\end{array}
+	\right]}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\extaugmx}[2]{
+	\left[\begin{matrix}
+		#1
+	\end{matrix}\right|\left.\begin{matrix}
+		#2
+	\end{matrix}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\linears}{\mathcal{L}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
+
+\begin{document}
+	\begin{center}
+		{\Large\textbf{MATH545: Problem Set 7}}\\
+		\large Grey Cole\\
+		April 13, 2026
+	\end{center}
+\section{}
+\subsection{}
+\[ T\left(\bmat{x\\y}\right) = A\bmat{x\\y} = \bmat{x-2y\\3x+y\\2y}\]
+Taking the coefficient matrix from the result of T gives us
+\[ T\left(\bmat{x\\y}\right) = \bmat{1 & -2\\3 & 1\\0 & 2} \cdot \bmat{x\\y} \implies \boxed{A = \bmat{1 & -2\\3 & 1\\0 & 2}}\]
+\subsection{}
+\begin{align*}
+	T(\bf{e}_1) &= \bmat{1 & -2\\3 & 1\\0 & 2} \cdot \bmat{1 \\ 0} = \bmat{1 \\ 3 \\ 0}\\
+	T(\bf{e}_2) &= \bmat{1 & -2\\3 & 1\\0 & 2} \cdot \bmat{0 \\ 1} = \bmat{-2 \\ 1 \\ 2}
+\end{align*}
+
+\section{}
+\textbf{Closure under Addition:} Let $T, S \in \linears(U,V)$. Define
+\[ (T+S)(u) = T(u) + S(u) \]
+We check addition and scalar multiplication to determine if $T + S \in \linears(U,V)$.\\
+Take any $u_1,u_2 \in U$.
+\[ (T+S)(u_1 + u_2) = T(u_1 + u_2) + S(u_1 + u_2) \]
+Since T and S are linear,
+\begin{align*}
+	T(u_1 + u_2) = T(u_1) + T(u_2)\\
+	S(u_1 + u_2) = S(u_1) + S(u_2)
+\end{align*}
+Then we rearrange:
+\[ T(u_1) + S(u_1) + T(u_2) + S(u_2) = (T + S)(u_1) + (T + S)(u_2) \]
+Thus we have shown additivity. Now we show scalar multiplication.\\
+Let $c \in \reals, u \in U$.
+\[ (T + S)(cu) = T(cu) + S(cu) \]
+\[ = cT(u) + cS(u) = c(T(u) + S(u)) = c(T+s)(u) \]
+Therefore $T + S$ is linear, so $T + S \in \linears$ which implies closure under addition.\\
+\textbf{Closure under Scalar Multiplication:} Let $T \in \linears(U,V)$ and $c \in \reals$. Define
+\[ (cT)(u) = c\cdot T(u) \]
+We check addition and scalar multiplication to determine if $cT \in \linears(U,V)$.\\
+\[ (cT)(u_1 + u_2) = c \cdot T(u_1 + u_2) \]
+Since $T$ is linear,
+\[ c[T(u_1) + T(u_2)] = cT(u_1) + cT(u_2) = (cT)(u_1) + (cT)(u_2) \]
+Thus we have shown additivity. Now we show scalar multiplication.\\
+Let $k \in \reals$.
+\begin{align*}
+	(cT)(ku) = c \cdot T(ku) = c \cdot (kT(u)) = (ck)T(u)\\
+	= k(cT)(u)
+\end{align*}
+Therefore $cT$ is linear, so $cT \in \linears$ which implies closure under scalar multiplication.\\
+The rest of the vector space axioms trivially follow from the fact that $V$ is a vector space. Thus $\linears(U,V)$ is a vector space.
+
+\end{document}
