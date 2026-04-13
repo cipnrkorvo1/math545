@@ -99,4 +99,72 @@ Let $k \in \reals$.
 Therefore $cT$ is linear, so $cT \in \linears$ which implies closure under scalar multiplication.\\
 The rest of the vector space axioms trivially follow from the fact that $V$ is a vector space. Thus $\linears(U,V)$ is a vector space.
 
+\section{}
+Because $T$ is a linear transformation, we can take the coefficient matrix
+\[ A = \bmat{-2 & 2 & 2\\3 & 5 & 1\\0 & 2 & 1} \]
+Because we are looking for a basis for $N(T)$, we would like to find the solution set to $A\vec{x} = \vec{0}$, from which we can determine the basis.\\
+\begin{align*}
+	\begin{augmx}{3}-2&2&2&0\\3&5&1&0\\0&2&1&0\end{augmx} &\xrightarrow{R_2\to R_2 + R_1}
+	\begin{augmx}{3}-2 & 2 & 2 & 0\\1 & 7 & 3 & 0\\0 & 2 & 1 & 0\end{augmx} \xrightarrow[R_1\to R_1 - 2R_3]{R_2 \to R_2 - 3R_3} \begin{augmx}{3}-2 & -2 & 0 & 0\\1 & 1 & 0 & 0\\0 & 2 & 1 & 0\end{augmx}\\
+	&\xrightarrow{R_1\to R_1 + 2R_2} \begin{augmx}{3}0&0&0&0\\1&1&0&0\\0&2&1&0\end{augmx}\xrightarrow{\hspace{5em}} \begin{augmx}{3}1&1&0&0\\0&2&1&0\\0&0&0&0\end{augmx}
+\end{align*}
+Using back substitution to solve:
+\begin{align*}
+	0 = 0 \rightarrow \text{$z$ is a free variable}\\
+	2y+2 = 0 \rightarrow y = -\frac{1}{2}z\\
+	x + y = 0 \rightarrow x = \frac{1}{2}z
+\end{align*} 
+Thus the solution set to $A\vec{x} = \vec{0}$ is
+\[ \vec{x} = \bmat{\frac{1}{2}z\\ -\frac{1}{2}z\\z} = z\bmat{\frac{1}{2}\\-\frac{1}{2}\\1} \]
+Because $z$ is some constant, this solution set is itself a linearly independent set of vectors, which qualifies as a basis. In other words, we have shown that a basis of $N(T)$ is
+\[ \left\{ \bmat{ \frac{1}{2} \\ \; -\frac{1}{2} \; \\ 1} \right\} \]
+
+\section{}
+\subsection{}
+\subsection{}
+Because all bases for $R^3$ are row-equivalent to the identity matrix, 
+\subsection{}
+
+\section{}
+\subsection{}
+We can first convert $p(x)$ to a coefficient matrix $[-2, -1, 1]^T$ and observe that a similar transformation on $T$ will give us
+\[ T\left(\bmat{c\\b\\a}\right) = \bmat{-b\\b\\c} \in R(T) \]
+Then, we can directly compare our coefficient matrix to the result of $T$ to determine if it is in $R(T)$
+\[ \bmat{-b\\b\\c} \begin{array}{c}\to\\\to\\\to\end{array} \bmat{-2\\-1\\1} \implies \begin{array}{c}-b = -2 \\ b = -1\\ c = 1\end{array} \]
+However this leads to a contradiction: $b = 2$ and $b = -1$. Thus, this cannot have been the result of $T$, and so $p(x)$ cannot be in $R(T)$.
+
+\subsection{}
+We can use the conversion in \textbf{5.a} to find a basis. Observe that we can separate the latter coefficient matrix into
+\[ b \cdot \bmat{-1\\1\\0} + c \cdot \bmat{0\\\;0\;\\1} \]
+This produces a set of vectors each multiplied by some constant, which represent any value in $R(T)$. It is trivial to see that the two vectors are linearly independent as well. Thus, these two vectors form a basis for $R(T)$:
+\[ \left\{ \bmat{-1\\1\\0},\bmat{0\\\;0\;\\1} \right\} \]
+
+\section{}
+We will first determine $R(T)$ given a $p(x) = ax^2 + bx + c$:
+\begin{align*}
+	T(p(x)) &= x \cdot p'(x)\\
+	T(ax^2 + bx + c) &= x \cdot \frac{d}{dx}(ax^2 + bx + c)\\
+	&= x \cdot \frac{d}{dx}ax^2 + x \cdot \frac{d}{dx}bx + x \cdot \frac{d}{dx}c\\
+	&= x \cdot 2ax + x \cdot b + x \cdot 0\\
+	&= 2ax^2 + bx + 0
+	&= R(T)
+\end{align*}
+Let us look at the first element of the given set, $T(1)$. If $p(x) = 1$, then it follows that the coefficients $(a,b,c)$ must be $(0, 0, 1)$ respectively. By plugging these values into the formula derived from the definition of $T$, we get the resulting coefficient vector
+\[ T(1) = T\left(\bmat{1\\0\\0}\right) = \bmat{0\\0\\0}\]
+However, the zero vector cannot be in a basis because any set containing the zero vector is linearly dependent. Thus we can ignore the other two elements in the set, as we have already shown that this set cannot be a basis of $R(T)$.
+
+\section{}
+We begin with the assertion that $\mathbb{M}_n(\reals)$ is a vector space, defined previously with matrix addition and scalar multiplication.\\
+First we will show that $T(A) = A^T$ is a linear transformation.\\
+Let $A, B \in \mathbb{M}_n(\reals)$.
+\[ T(A + B) = (A + B)^T = A^T + B^T = T(A) + T(B) \]
+which satisfies additivity.\\
+Let $A \in \mathbb{M}_n(\reals)$ and $c \in \reals$.
+\[ T(cA) = (cA)^T = c \cdot A^T = c \cdot T(A) \]
+which satisfies scalar multiplication, proving $T$ is a linear transformation.\\
+Then, to further show that $T$ is an isomorphism of vector spaces, we must show that $T$ is bijective.\\
+\textbf{One-to-One:} Let $A, B \in \mathbb{M}_n(\reals)$ where $T(A) = T(B)$. Then $A^T = B^T$. If we take the transpose of both sides, we get $A = B$. We have shown $T(A) = T(B) \implies A = B$, therefore $T$ is one-to-one/injective.\\
+\textbf{Onto:} Let $A, C \in \mathbb{M}_n(\reals)$ and choose $A$ such that $A = C^T$. Then $T(A) = A^T = (C^T)^T = C$. We have shown $\forall C \in \mathbb{M}_n(\reals), \exists A \in \mathbb{M}_n(\reals)$ such that $T(A) = C$, which makes $T$ onto/surjective.\\
+Since we have shown that $T$ is injective and surjective, it is bijective, which completes the proof that it is an isomorphism of vector spaces.
+
 \end{document}
