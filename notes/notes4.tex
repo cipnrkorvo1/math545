@@ -207,5 +207,35 @@ Let $V$ and $W$ be vector spaces and $L: V \rightarrow W$ a linear transformatio
 	Let $V$ and $W$ be vector spaces. A linear transformation $T: V \rightarrow W$ that is both one-to-one and onto is called an \bf{isomorphism}. In this case the vector spaces $V$ and $W$ are said to be \bf{isomorphic}.
 \end{definition}
 
+\begin{theorem}
+	Let $A$ be an $n \times n$ matrix and $T : \reals^n \rightarrow \reals^n$ be the mapping defined by $T(\vec{x}) = A\vec{x}$. Then $T$ is an isomorphism $\iff$ $A$ is invertible.
+\end{theorem}
+
+\begin{definition}[Inverse of a Linear Transformation]
+	Let $V$ and $W$ be vector spaces and $T:V \rightarrow W$ a one-to-one linear transformation. The mapping $T^{-1}:R(T) \rightarrow V$, defined by
+	\[
+	\begin{array}{ccc}
+		T^{-1}(\vec{w}) = \vec{v} & \text{if and only if} & T(\vec{v}) = \vec{w}
+	\end{array}
+	\]
+	is called the \textbf{inverse} of $T$. If $T$ is onto, then $T^{-1}$ is defined on all of $W$.
+\end{definition}
+
+\begin{theorem}
+	If $V$ and $W$ are vector spaces of dimension $n$, then $V$ and $W$ are isomorphic.
+\end{theorem}
+
+\begin{factsummary}
+	Let $V$ and $W$ be vector spaces and $T$ a linear transformation from $V$ to $W$.
+	\begin{enumerate}[font=\bfseries,itemsep=0pt]
+		\item The mapping $T$ is one-to-one $\iff$ the null space of $T$ consists of only the zero vector.
+		\item If $\{ \vec{v}_1,...,\vec{v}_n\}$ is a basis for $V$ and $T$ is one-to-one, then $S = \{ T(\vec{v}_1),...,T(\vec{v}_n) \}$ is a basis for the range of $T$. If $T$ is also onto, then $S$ is a basis for $W$.
+		\item Every vector space of dimension $n$ is isomorphic to the Euclidean space $\reals^n$.
+		\item If $T$ is one-to-one, then $T^{-1}$ is also a linear transformation.
+		\item If $V$ and $W$ are both of dimension $n$, then they are isomorphic.
+		\item Let $A$ be an $n \times n$ matrix and $T(\vec{x}) = A\vec{x})$. Then the mapping $T$ is an isomorphism $\iff$ $A$ is invertible.
+		\item If $A$ is an invertible matrix and $T(\vec{x}) = A\vec{x}$, then $T^{-1}(\vec{x}) = A^{-1}\vec{x}$.
+	\end{enumerate}
+\end{factsummary}
 
 \end{document}

@@ -1,0 +1,75 @@
+\documentclass[]{article}
+\usepackage{amsmath, amssymb, amsthm}
+
+\usepackage{multicol, enumitem, physics, changepage}
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\newcommand{\mrow}[3]{\left[
+	\begin{array}{ccc}
+		#1 & #2 & #3
+	\end{array}
+	\right]}
+\newcommand{\mcol}[3]{\left[
+	\begin{array}{c}
+		#1\\
+		#2\\
+		#3
+	\end{array}
+	\right]}
+
+\newenvironment{augmx}[1]{%
+	\left[\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+	\end{array}\right]
+}
+
+\newcommand{\extaugmx}[2]{
+	\left[\begin{matrix}
+		#1
+	\end{matrix}\right|\left.\begin{matrix}
+		#2
+	\end{matrix}\right]
+}
+
+\newcommand{\xlrightarrow}{\xrightarrow{\hspace{0.8cm}}}
+\newcommand{\reals}{\mathbb{R}}
+
+\newcommand{\linears}{\mathcal{L}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\letmatrix}[2]{\mathcal{M}_{#1 \times #2}(\reals)}
+
+\newcommand{\detmat}[1]{
+	\left|\hspace{0.5em}
+	\begin{matrix}
+		#1
+	\end{matrix}
+	\hspace{0.5em}\right|
+}
+
+\begin{document}
+	\begin{center}
+		{\Large\textbf{MATH545: Problem Set 8}}\\
+		\large Grey Cole\\
+		April 27, 2026
+	\end{center}
+	
+	\section{}
+	We begin with the assertion that $\mathbb{M}_n(\reals)$ is a vector space, defined previously with matrix addition and scalar multiplication.\\
+	First we will show that $T(A) = A^T$ is a linear transformation.\\
+	Let $A, B \in \mathbb{M}_n(\reals)$.
+	\[ T(A + B) = (A + B)^T = A^T + B^T = T(A) + T(B) \]
+	which satisfies additivity.\\
+	Let $A \in \mathbb{M}_n(\reals)$ and $c \in \reals$.
+	\[ T(cA) = (cA)^T = c \cdot A^T = c \cdot T(A) \]
+	which satisfies scalar multiplication, proving $T$ is a linear transformation.\\
+	Then, to further show that $T$ is an isomorphism of vector spaces, we must show that $T$ is bijective.\\
+	\textbf{One-to-One:} Let $A, B \in \mathbb{M}_n(\reals)$ where $T(A) = T(B)$. Then $A^T = B^T$. If we take the transpose of both sides, we get $A = B$. We have shown $T(A) = T(B) \implies A = B$, therefore $T$ is one-to-one/injective.\\
+	\textbf{Onto:} Let $A, C \in \mathbb{M}_n(\reals)$ and choose $A$ such that $A = C^T$. Then $T(A) = A^T = (C^T)^T = C$. We have shown $\forall C \in \mathbb{M}_n(\reals), \exists A \in \mathbb{M}_n(\reals)$ such that $T(A) = C$, which makes $T$ onto/surjective.\\
+	Since we have shown that $T$ is injective and surjective, it is bijective, which completes the proof that it is an isomorphism of vector spaces.
+	
+	\section{}
+
+\end{document}
