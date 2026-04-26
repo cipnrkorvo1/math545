@@ -71,5 +71,79 @@
 	Since we have shown that $T$ is injective and surjective, it is bijective, which completes the proof that it is an isomorphism of vector spaces.
 	
 	\section{}
+	As a reminder, we define $\beta$ as the standard basis for $\mathcal{P}_2$, so $\beta = \{1, x, x^2\}$.\\
+	We can compute $T$ on each basis vector of $\beta$ to find each column of $[T]_{\beta}$.
+	\begin{align*}
+		T(1) &= 1 + x(0) = 1\\
+		T(x) &= x + x(1) = 2x\\
+		T(x^2) &= x^2 + x(2x) = 3x^2
+	\end{align*}
+	Now we can express each result in $\beta$:
+	\[
+		[T(1)]_{\beta} = \bmat{1\\0\\0} \qquad
+		[T(x)]_{\beta} = \bmat{0\\2\\0}\qquad
+		[T(x^2)]_{\beta} = \bmat{0\\0\\3}
+	\]
+	These are each the columns of the matrix:
+	\[ \boxed{[T]_{\beta} = \bmat{1&0&0\\0&2&0\\0&0&3}} \]
+	
+	\section{}
+	\subsection{}
+	\begin{gather*}
+		\begin{aligned}
+			T(1) &= x(0) + (0) = 0\\
+			\\
+			T(x) &= x(1) + (0) = x\\
+			\\
+			T(x^2) &= x(2x) + (2) = 2x^2 + 2
+		\end{aligned}
+		\qquad
+		\begin{aligned}
+			[T(1)]_{\beta_1} = \bmat{0\\0\\0}\\
+			[T(x)]_{\beta_1} = \bmat{0\\1\\0}\\
+			[T(x^2)]_{\beta_1} = \bmat{2\\0\\2}
+		\end{aligned}
+		\qquad
+		\boxed{[T]_{\beta_1} = \bmat{0&0&2\\0&1&0\\0&0&2}}
+	\end{gather*}
+	\subsection{}
+	\begin{gather*}
+		\begin{aligned}
+			T(1) &= x(0) + (0) = 0\\\\
+			T(x) &= x(1) + (0) = x\\\\
+			T(1 + x^2) &= x(2x) + (2) = 2x^2 + 2\\&= 2(1 + x^2)
+		\end{aligned}
+		\qquad
+		\begin{aligned}
+			[T(1)]_{\beta_2} = \bmat{0\\0\\0}\\
+			[T(x)]_{\beta_2} = \bmat{0\\1\\0}\\
+			[T(1 + x^2)]_{\beta_2} = \bmat{0\\0\\2}
+		\end{aligned}
+		\qquad
+		\boxed{[T]_{\beta_2} = \bmat{0&0&0\\0&1&0\\0&0&2}}
+	\end{gather*}
+	\subsection{}
+	To find $P$, we write each vector of $\beta_1$ in terms of $\beta_2$ and use the results as the columns.
+	\begin{gather*}
+		\begin{aligned}
+			1 = 1 \cdot 1 + 0 \cdot x + 0 \cdot (1 + x^2)\\\\
+			x = 0 \cdot 1 + 1 \cdot x + 0 \cdot (1 + x^2)\\\\
+			x^2 = -1 \cdot 1 + 0 \cdot x + 1 \cdot (1 + x^2)
+		\end{aligned}
+		\qquad
+		\begin{aligned}
+			[1]_{\beta_2} &= \bmat{1\\0\\0}\\
+			[x]_{\beta_2} &= \bmat{0\\1\\0}\\
+			[x^2]_{\beta_2} &= \bmat{-1\\0\\1}
+		\end{aligned}
+		\qquad
+		P = [I]_{\beta_2}^{\beta_1} = \bmat{1&0&-1\\0&1&0\\0&0&1}
+	\end{gather*}
+	\subsection{}
+	To demonstrate that $[T]_{\beta_1}$ and $[T]_{\beta_2}$ are similar, we will use the equality \[[T]_{\beta_2} = P^{-1} \cdot [T]_{\beta_1} \cdot P\]
+	\begin{align*}
+		\bmat{0&0&0\\0&1&0\\0&0&2} &= \bmat{1&0&1\\0&1&0\\0&0&1}\bmat{0&0&2\\0&1&0\\0&0&2}\bmat{1&0&-1\\0&1&0\\0&0&1}\\
+		&= UNFINISHED FIX PLS
+	\end{align*}
 
 \end{document}

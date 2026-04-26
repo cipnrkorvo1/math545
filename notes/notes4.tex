@@ -229,7 +229,7 @@ Let $V$ and $W$ be vector spaces and $L: V \rightarrow W$ a linear transformatio
 	Let $V$ and $W$ be vector spaces and $T$ a linear transformation from $V$ to $W$.
 	\begin{enumerate}[font=\bfseries,itemsep=0pt]
 		\item The mapping $T$ is one-to-one $\iff$ the null space of $T$ consists of only the zero vector.
-		\item If $\{ \vec{v}_1,...,\vec{v}_n\}$ is a basis for $V$ and $T$ is one-to-one, then $S = \{ T(\vec{v}_1),...,T(\vec{v}_n) \}$ is a basis for the range of $T$. If $T$ is also onto, then $S$ is a basis for $W$.
+		\item If $\{ \vec{v}_1,...,\vec{v}_n\}$ is a basis for $V$ and $T$ is one-to-one, then \\$S = \{ T(\vec{v}_1),...,T(\vec{v}_n) \}$ is a basis for the range of $T$. If $T$ is also onto, then $S$ is a basis for $W$.
 		\item Every vector space of dimension $n$ is isomorphic to the Euclidean space $\reals^n$.
 		\item If $T$ is one-to-one, then $T^{-1}$ is also a linear transformation.
 		\item If $V$ and $W$ are both of dimension $n$, then they are isomorphic.
@@ -239,6 +239,14 @@ Let $V$ and $W$ be vector spaces and $L: V \rightarrow W$ a linear transformatio
 \end{factsummary}
 
 \section{Matrix Representation of a Linear Transformation}
+
+Given a $T : \reals^3 \rightarrow \reals^2$ defined as
+\[ T(\vec{e}_1) = \bmat{1\\1}, \; T(\vec{e}_2) = \bmat{-1\\2}, \; T(\vec{e}_3) = \bmat{0\\1} \]
+We can write the linear transformation $T$ as a $2 \times 3$ matrix $A$ whose column vectors are $T(\vec{e}_1), T(\vec{e}_2), T(\vec{e}_3)$. Then
+\[ T(\vec{v}) = \bmat{1&-1&0\\1&2&1} \vec{v} = A\vec{v} \]
+In general, if $T: \reals^n \rightarrow \reals^m$ is a linear transformation, then it is possible to write \[T(\vec{v}) = A\vec{v}\]
+where $A$ is the $m \times n$ matrix whose $j$th column vector is $T(\vec{e}_j)$ for $j = 1,2,...,n$.
+The matrix $A$ is called the \textbf{matrix representation of $T$ relative to the standard bases} of $\reals^n$ and $\reals^m$.
 
 \begin{theorem}
 	Let $V$ and $W$ be finite dimensional vector spaces with ordered bases $B = \{\vec{v}_1,...,\vec{v}_n\}$ and $B' = \{ \vec{w}_1,...,\vec{w}_n \}$, respectively, and let $T: V \rightarrow W$ be a linear transformation. Then the matrix $[T]_B^{B'}$ is the matrix representation for $T$ relative to the bases $B$ and $B'$. Moreover, the coordinates of $T(\vec{v})$ relative to $B'$ are given by
