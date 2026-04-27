@@ -123,27 +123,85 @@
 		\boxed{[T]_{\beta_2} = \bmat{0&0&0\\0&1&0\\0&0&2}}
 	\end{gather*}
 	\subsection{}
-	To find $P$, we write each vector of $\beta_1$ in terms of $\beta_2$ and use the results as the columns.
+	To find $P = [I]_{\beta_1\leftarrow\beta_2}$, we calculate what coefficients transform each basis vector of $\beta_2$ to their corresponding vector of $\beta_1$ and construct each row with them: 
 	\begin{gather*}
 		\begin{aligned}
-			1 = 1 \cdot 1 + 0 \cdot x + 0 \cdot (1 + x^2)\\\\
-			x = 0 \cdot 1 + 1 \cdot x + 0 \cdot (1 + x^2)\\\\
-			x^2 = -1 \cdot 1 + 0 \cdot x + 1 \cdot (1 + x^2)
+			1 = 1 \cdot 1 + 0 \cdot x + 0 \cdot x^2\\\\
+            x = 0 \cdot 1 + 1 \cdot x + 0 \cdot x^2\\\\
+            1 + x^2 = 1 \cdot 1 + 0 \cdot x + 1 \cdot x^2
 		\end{aligned}
 		\qquad
 		\begin{aligned}
-			[1]_{\beta_2} &= \bmat{1\\0\\0}\\
-			[x]_{\beta_2} &= \bmat{0\\1\\0}\\
-			[x^2]_{\beta_2} &= \bmat{-1\\0\\1}
+			[1]_{\beta_1} &= \bmat{1\\0\\0}\\
+			[x]_{\beta_1} &= \bmat{0\\1\\0}\\
+			[1 + x^2]_{\beta_1} &= \bmat{1\\0\\1}
 		\end{aligned}
 		\qquad
-		P = [I]_{\beta_2}^{\beta_1} = \bmat{1&0&-1\\0&1&0\\0&0&1}
+		P = [I]_{\beta_2}^{\beta_1} = \bmat{1&0&1\\0&1&0\\0&0&1}
 	\end{gather*}
 	\subsection{}
 	To demonstrate that $[T]_{\beta_1}$ and $[T]_{\beta_2}$ are similar, we will use the equality \[[T]_{\beta_2} = P^{-1} \cdot [T]_{\beta_1} \cdot P\]
-	\begin{align*}
-		\bmat{0&0&0\\0&1&0\\0&0&2} &= \bmat{1&0&1\\0&1&0\\0&0&1}\bmat{0&0&2\\0&1&0\\0&0&2}\bmat{1&0&-1\\0&1&0\\0&0&1}\\
-		&= UNFINISHED FIX PLS
-	\end{align*}
+        \textit{Unfinished}
 
+    \section{}
+    Recall that matrices $A$ and $B$ are similar if there exists an invertible matrix $P$ such that
+    \[ B = P^{-1}AP \]
+    We begin by taking the transpose of each side
+    \[ B^T = (P^{-1}AP)^T \]
+    We can apply transposition properties to get
+    \[ (P^{-1}AP)^T = P^TA^T(P^{-1})^T = P^TA^T(P^T)^{-1}\]
+    Now we must rearrange the terms to match the required form to show similarity. Let $Q = (P^T)^{-1}$. Because $P$ is invertible, so is $P^T$, hence $Q = (P^T)^{-1}$ is also invertible. Then
+    \[ P^TA^T(P^T)^{-1} = Q^{-1}A^TQ \]
+    Thus we have shown
+    \[ B^T = Q^{-1}A^TQ \]
+    for some invertible matrix $Q$, which means $A^T$ and $B^T$ are similar matrices.
+
+    \section{}
+    Since we know $\vec{v}$ is an eigenvector, we can find $\lambda$ by solving the equation
+    \[ A\vec{v} = \lambda\vec{v} \]
+    First, find $A\vec{v}$:
+    \begin{gather*}
+        A\vec{v} = \bmat{1&1&1&0\\-1&-1&0&-1\\-1&1&0&1\\0&-1&-1&0}\bmat{0\\1\\-1\\0} %\rightarrow \quad
+        %\begin{aligned}
+        %    0 + 1 - 1 + 0 &= 0\\
+        %    0 - 1 + 0 + 0 &= -1\\
+        %    0 + 1 + 0 + 0 &= 1\\
+        %    0 - 1 + 1 + 0 &= 0
+        %\end{aligned}\quad
+        %\rightarrow 
+        = \bmat{0\\-1\\1\\0}
+    \end{gather*}
+    Now we have
+    \[ \lambda\vec{v} = \bmat{0\\-1\\1\\0} \]
+    Using this, we solve for the eigenvalue $\lambda$:
+    \[ \lambda \cdot \bmat{0\\1\\-1\\0} = \bmat{0\\-1\\1\\0} \longrightarrow \bmat{0\\\lambda\\-\lambda\\0} = \bmat{0\\-1\\1\\0} \longrightarrow \boxed{\lambda = -1}\]
+
+    \section{}
+    The eigenvalues of $A$ are solutions to
+    \[ \det(A-\lambda I) = 0 \]
+    We know $\det(M) = \det(M^T)$ for any square matrix $M$, thus
+    \[ \det(A-\lambda I) = \det((A - \lambda I)^T)\]
+    Distribute and simplify the transpose:
+    \[\det((A-\lambda I)^T) = \det(A^T - \lambda I^T) = \det(A^T - \lambda I) \]
+    Thus we have shown
+    \[ \det(A-\lambda I) = \det(A^T - \lambda I) \]
+    which means $A$ and $A^T$ have the same eigenvalues.\\
+    \\
+    We can show that $A$ and $A^T$ do not necessarily have the same eigenvectors with the following example:
+    \[ \text{Let } A = \bmat{1&1\\0&1}, \text{ thus } A^T = \bmat{1&0\\1&1}. \]
+    The eigenvectors of $A$ can be found by solving $(A-I)\vec{v} = 0$.
+    \[ \bmat{0&1\\0&0}\bmat{x\\y} = \bmat{0\\0} \longrightarrow \bmat{y\\0} = \bmat{0\\0} \implies y = 0, \text{ so } \vec{v} = \bmat{x\\0}\]
+    The eigenvectors of $A^T$ can be found by solving $(A^T-I)\vec{v} = 0$.
+    \[ \bmat{0&0\\1&0}\bmat{x\\y} = \bmat{0\\0} \longrightarrow \bmat{0\\x} = \bmat{0\\0} \implies x = 0, \text{ so } \vec{v} = \bmat{0\\y} \]
+    Thus we have shown that even though $A$ and $A^T$ have the same eigenvalue, they may not have the same eigenvectors.
+
+    \section{}
+    Recall $\text{span}(\{ \vec{v}_1,...,\vec{v}_m \}) = \{ c_1\vec{v}_1 + \cdots + c_m\vec{v}_m \; | \; c_1,...,c_m \text{ are scalars } \}$. Select some $\vec{v} \in S$. Since $\vec{v} \in S$,
+    \[ \vec{v} = c_1\vec{v}_1 + \cdots + c_m\vec{v}_m \]
+    Now apply $A$ to both sides,
+    \[ A\vec{v} = A(c_1\vec{v}_1 + \cdots + c_m\vec{v}_m) = c_1A\vec{v}_1 + \cdots + c_mA\vec{v}_m \]
+    Using the eigenvector property $A\vec{v}_i = \lambda_i\vec{v}_i$,
+    \[ A\vec{v} = c_1\lambda_1\vec{v}_1 + \cdots + c_m\lambda_m\vec{v}_m \]
+    $A\vec{v}$ is a linear combination of $\vec{v}_1,...,\vec{v}_m$, so $A\vec{v} \in S$. Therefore $\vec{v} \in S \implies A\vec{v} \in S$
+    
 \end{document}
